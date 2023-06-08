@@ -2,5 +2,15 @@
   margin: 0;
   padding: 0;
   display: flex;
-  max-width: 880px;
+  width: 68%;
+  min-width: 320px;
+  height: 120px;
+  border-bottom: 1px solid #545454;
+  align-self: center;
+}
+
+.header__image {
+  max-width: 173px;
+  max-height: 33px;
+  align-self: center;
 }

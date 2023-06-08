@@ -1,0 +1,35 @@
+.profile {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 128px auto 150px;
+  column-gap: 45px;
+  padding: 36px 0;
+}
+
+.profile__picture {
+  width: 128px;
+  height: 128px;
+  border-radius: 100%;
+}
+
+.profile__header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.profile__header_content_name {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 42px;
+  line-height: 48px;
+}
+
+.profile__header_content_proffesion {
+  margin-top: 7px;
+}
+
+.profile__add-button {
+  display: flex;
+}
