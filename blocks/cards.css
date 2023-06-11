@@ -24,7 +24,7 @@
   }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 660px) {
   .cards__list {
     padding: 0;
     list-style: none;
