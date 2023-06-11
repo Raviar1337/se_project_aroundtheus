@@ -1,5 +1,6 @@
 .profile {
   max-width: 880px;
+  width: 100%;
   display: flex;
   column-gap: 45px;
   padding: 36px 0;
@@ -24,6 +25,8 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
+  display: flex;
+  flex-direction: row;
 }
 
 .profile__header_content_proffesion {
@@ -38,17 +41,7 @@
     padding: 36px 0;
   }
 
-  .profile__header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-right: auto;
-  }
-
   .profile__header_content_name {
-    font-family: "Inter";
-    font-style: normal;
-    font-weight: 500;
     font-size: 21px;
     line-height: 24px;
   }
@@ -65,9 +58,6 @@
   }
 
   .profile__header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     margin-right: 0;
     align-items: center;
   }
