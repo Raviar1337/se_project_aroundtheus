@@ -2,7 +2,6 @@
   max-width: 880px;
   width: 100%;
   display: flex;
-  column-gap: 45px;
   padding: 36px 0;
 }
 
@@ -10,13 +9,16 @@
   width: 128px;
   height: 128px;
   border-radius: 100%;
+  margin-right: 45px;
 }
 
 .profile__header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-right: auto;
+  display: grid;
+  grid-template-areas:
+    "title button"
+    "description description";
+  grid-template-columns: minmax(auto, 373px) auto;
+  grid-gap: 7px 17px;
 }
 
 .profile__header_content_name {
@@ -25,29 +27,27 @@
   font-weight: 500;
   font-size: 42px;
   line-height: 48px;
-  display: flex;
-  flex-direction: row;
+  white-space: nowrap;
+  align-self: center;
+  margin: 0;
 }
 
 .profile__header_content_proffesion {
-  margin-top: 7px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 22px;
+  margin: 0;
 }
 
 @media screen and (max-width: 980px) {
-  .profile {
-    max-width: 880px;
-    display: flex;
-    column-gap: 45px;
-    padding: 36px 0;
-  }
-
   .profile__header_content_name {
     font-size: 21px;
     line-height: 24px;
   }
-
-  .profile__header_content_proffesion {
-    margin-top: 7px;
+  .profile__header {
+    grid-template-columns: auto auto;
   }
 }
 
@@ -57,8 +57,19 @@
     align-items: center;
   }
 
-  .profile__header {
+  .profile__picture {
     margin-right: 0;
-    align-items: center;
+    margin-bottom: 26px;
+  }
+
+  .profile__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profile__header_content_proffesion {
+    width: 100%;
+    text-align: center;
   }
 }

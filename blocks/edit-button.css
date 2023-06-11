@@ -5,9 +5,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: flex-end;
-  margin-bottom: 8px;
-  margin-left: 18px;
+  grid-area: "button";
+  align-self: center;
 }
 
 .edit-button:hover {
@@ -18,12 +17,5 @@
   .edit-button {
     width: 18px;
     height: 18px;
-  }
-}
-
-@media screen and (max-width: 660px) {
-  .edit-button {
-    margin-bottom: 4px;
-    margin-left: 10px;
   }
 }
