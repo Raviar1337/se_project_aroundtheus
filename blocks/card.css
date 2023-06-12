@@ -27,18 +27,20 @@
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  margin: 0;
 }
 
 .card__like-button {
   border-style: none;
-  background-color: white;
+  background-color: transparent;
   cursor: pointer;
 }
+
 .card__button-image {
   width: 21px;
   height: 18px;
 }
 
-.card__like-button:hover .card__button-image {
+.card__like-button:hover {
   opacity: 0.5;
 }
