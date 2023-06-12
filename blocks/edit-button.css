@@ -7,10 +7,12 @@
   justify-content: center;
   grid-area: "button";
   align-self: center;
+  background-color: black;
+  cursor: pointer;
 }
 
 .edit-button:hover {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 @media screen and (max-width: 980px) {

@@ -2,13 +2,13 @@
   max-width: 880px;
   width: 100%;
   display: flex;
-  padding: 36px 0;
+  padding: 36px 0 47px;
 }
 
 .profile__picture {
   width: 128px;
   height: 128px;
-  border-radius: 100%;
+  border-radius: 50%;
   margin-right: 45px;
 }
 
@@ -21,8 +21,8 @@
   grid-gap: 7px 17px;
 }
 
-.profile__header_content_name {
-  font-family: "Inter";
+.profile__title {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 42px;
@@ -30,10 +30,13 @@
   white-space: nowrap;
   align-self: center;
   margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  max-width: 373px;
 }
 
-.profile__header_content_proffesion {
-  font-family: "Inter";
+.profile__description {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 18px;
@@ -42,9 +45,13 @@
 }
 
 @media screen and (max-width: 980px) {
-  .profile__header_content_name {
-    font-size: 21px;
-    line-height: 24px;
+  .profile__title {
+    font-size: 22px;
+    line-height: 27px;
+  }
+  .profile__description {
+    font-size: 14px;
+    line-height: 17px;
   }
   .profile__header {
     grid-template-columns: auto auto;
@@ -68,7 +75,11 @@
     justify-content: center;
   }
 
-  .profile__header_content_proffesion {
+  .profile__title {
+    max-width: 196px;
+  }
+
+  .profile__description {
     width: 100%;
     text-align: center;
   }
