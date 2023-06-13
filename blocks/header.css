@@ -23,6 +23,9 @@
   .header__image {
     width: 126px;
     height: 24px;
+  }
+
+  .header {
     padding: 28px 0 32px 0;
   }
 }
