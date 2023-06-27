@@ -27,49 +27,48 @@ let initialCards = [
 
 //----------------- DOM DECLARATIONS ------------------------------------------------
 
-let modal = document.querySelector(".modal");
+const profileEditModal = document.querySelector(".modal");
 
-let modalCloseButton = document.querySelector(".modal__close-button");
+const profileModalCloseButton = document.querySelector(".modal__close-button");
 
-let editButton = document.querySelector(".edit-button");
+const profileModalEditButton = document.querySelector(".edit-button");
 
-let profileName = document.querySelector(".profile__title");
+const profileName = document.querySelector(".profile__title");
 
-let profileDescription = document.querySelector(".profile__description");
+const profileDescription = document.querySelector(".profile__description");
 
-let inputProfileName = document.querySelector(".modal__input_type_name");
+const inputProfileName = document.querySelector(".modal__input_type_name");
 
-let inputProfileDescription = document.querySelector(
+const inputProfileDescription = document.querySelector(
   ".modal__input_type_description"
 );
 
-let modalSaveButton = document.querySelector(".modal__save-button");
+const modalSaveButton = document.querySelector(".modal__save-button");
 
-let modalForm = document.querySelector(".modal__form");
+const modalForm = document.querySelector(".modal__form");
 
-let cardElementTemplate = document.querySelector("#cardElementTemplate").content
-  .firstElementChild;
+const cardElementTemplate = document.querySelector("#cardElementTemplate")
+  .content.firstElementChild;
 
-let cardsList = document.querySelector(".cards__list");
+const cardsList = document.querySelector(".cards__list");
 
-// let cardElement = cardElementTemplate.querySelector(".card").cloneNode(true);
 //_________________________________________________________________________________________
 
 //----------------------FUNCTIONS --------------------------------------------------------
 
 function openModal() {
-  modal.classList.add("modal_opened");
+  profileEditModal.classList.add("modal_opened");
   inputProfileName.value = profileName.textContent;
   inputProfileDescription.value = profileDescription.textContent;
 }
 
 function closeModal() {
-  modal.classList.remove("modal_opened");
+  profileEditModal.classList.remove("modal_opened");
 }
 
 function saveEditProfileChanges(evt) {
   evt.preventDefault();
-  modal.classList.remove("modal_opened");
+  profileEditModal.classList.remove("modal_opened");
   profileName.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
 }
@@ -88,9 +87,9 @@ function getCardElement(data) {
 
 //------------------------ EVENTS ---------------------------------------------------------------
 
-editButton.addEventListener("click", openModal);
+profileModalEditButton.addEventListener("click", openModal);
 
-modalCloseButton.addEventListener("click", closeModal);
+profileModalCloseButton.addEventListener("click", closeModal);
 
 modalForm.addEventListener("submit", saveEditProfileChanges);
 
