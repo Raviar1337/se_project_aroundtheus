@@ -25,7 +25,7 @@ let initialCards = [
   },
 ];
 
-//----------------- LET DECLARATIONS ------------------------------------------------
+//----------------- DOM DECLARATIONS ------------------------------------------------
 
 let modal = document.querySelector(".modal");
 
@@ -46,6 +46,13 @@ let inputProfileDescription = document.querySelector(
 let modalSaveButton = document.querySelector(".modal__save-button");
 
 let modalForm = document.querySelector(".modal__form");
+
+let cardElementTemplate = document.querySelector("#cardElementTemplate").content
+  .firstElementChild;
+
+let cardsList = document.querySelector(".cards__list");
+
+// let cardElement = cardElementTemplate.querySelector(".card").cloneNode(true);
 //_________________________________________________________________________________________
 
 //----------------------FUNCTIONS --------------------------------------------------------
@@ -67,6 +74,16 @@ function saveEditProfileChanges(evt) {
   profileDescription.textContent = inputProfileDescription.value;
 }
 
+function getCardElement(data) {
+  let cardElement = cardElementTemplate.cloneNode(true);
+  let cardImageElement = cardElement.querySelector(".card__image");
+  let cardTitleElement = cardElement.querySelector(".card__title");
+  cardTitleElement.textContent = data.name;
+  cardImageElement.src = data.link;
+  cardImageElement.alt = data.name;
+  return cardElement;
+}
+
 //________________________________________________________________________________________________
 
 //------------------------ EVENTS ---------------------------------------------------------------
@@ -79,4 +96,8 @@ modalForm.addEventListener("submit", saveEditProfileChanges);
 
 //________________________________________________________________________________________________
 
-console.log(modalCloseButton);
+//---- Nonsense that took to long to figure out because I wrote colneNode instead of cloneNode :( -----
+
+initialCards.forEach((data) => {
+  cardsList.prepend(getCardElement(data));
+});
