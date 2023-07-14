@@ -144,6 +144,7 @@ function saveAddCardChanges(evt) {
 
 //-- I made the above function work by changing the initial cards array to let from const.
 //-- Alternitively i could leave it const and use the for each method to clear the array
+//-- Maybe just making a new array and runing the for each on it  ??
 //-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
 
 //________________________________________________________________________________________________
