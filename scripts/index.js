@@ -1,4 +1,4 @@
-const initialCards = [
+let initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -25,7 +25,7 @@ const initialCards = [
   },
 ];
 
-//----------------- DOM DECLARATIONS ------------------------------------------------
+//----------------- DOM DECLARATIONS For profile edit modal ------------------------------------------------
 
 const profileEditModal = document.querySelector(".modal");
 
@@ -54,7 +54,31 @@ const cardsList = document.querySelector(".cards__list");
 
 //_________________________________________________________________________________________
 
+//-----DOM Declarations for adding cards -------------------------------------------------------------
+
+const arrModal = document.querySelectorAll(".modal");
+
+const cardModalAddButton = document.querySelector(".add-button");
+
+const cardAddModal = arrModal[1];
+
+const cardAddModalCloseButton = cardAddModal.querySelector(
+  ".modal__close-button"
+);
+
+const cardAddModalSaveButton = cardAddModal.querySelector(
+  ".modal__save-button"
+);
+
+const inputCardName = cardAddModal.querySelector(".modal__input_type_name");
+
+const inputImageLink = cardAddModal.querySelector(
+  ".modal__input_type_description"
+);
+
 //----------------------FUNCTIONS --------------------------------------------------------
+
+//---profile edit functions----------
 
 function openModal() {
   profileEditModal.classList.add("modal_opened");
@@ -73,6 +97,8 @@ function saveEditProfileChanges(evt) {
   profileDescription.textContent = inputProfileDescription.value;
 }
 
+//---card loading function--------
+
 function getCardElement(data) {
   let cardElement = cardElementTemplate.cloneNode(true);
   let cardImageElement = cardElement.querySelector(".card__image");
@@ -83,15 +109,62 @@ function getCardElement(data) {
   return cardElement;
 }
 
+//---add card functions-------------
+
+function openCardAddModal() {
+  cardAddModal.classList.add("modal_opened");
+}
+
+function closeCardAddModal() {
+  cardAddModal.classList.remove("modal_opened");
+  inputCardName.value = "";
+  inputImageLink.value = "";
+}
+
+function saveAddCardChanges(evt) {
+  evt.preventDefault();
+  cardAddModal.classList.remove("modal_opened");
+  let name = inputCardName.value;
+  let link = inputImageLink.value;
+  inputCardName.value = "";
+  inputImageLink.value = "";
+  console.log(name);
+  console.log(link);
+  let newCard = {
+    name: name,
+    link: link,
+  };
+  initialCards = [];
+  console.log(newCard);
+  initialCards.push(newCard);
+  initialCards.forEach((data) => {
+    cardsList.prepend(getCardElement(data));
+  });
+}
+
+//-- I made the above function work by changing the initial cards array to let from const.
+//-- Alternitively i could leave it const and use the for each method to clear the array
+//-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
+
 //________________________________________________________________________________________________
 
 //------------------------ EVENTS ---------------------------------------------------------------
+
+//---profile edit modal events
 
 profileModalEditButton.addEventListener("click", openModal);
 
 profileModalCloseButton.addEventListener("click", closeModal);
 
 modalForm.addEventListener("submit", saveEditProfileChanges);
+
+//---card add modal events---------
+
+cardModalAddButton.addEventListener("click", openCardAddModal);
+
+cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
+
+cardAddModalSaveButton.addEventListener("click", saveAddCardChanges);
 
 //________________________________________________________________________________________________
 

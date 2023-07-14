@@ -54,7 +54,7 @@
       </div>
     </div>
 
-    <!-- Just a code marker dont mind me !!!  :D -->
+    <!-- Profile Edit Modal Start -->
     <div class="modal">
       <div class="modal__container">
         <button type="button" class="modal__close-button"></button>
@@ -78,8 +78,35 @@
         </form>
       </div>
     </div>
-    <!-- end of code marker, remember to color inside the lines -->
-    <!-- Just a code marker dont mind me !!!  :D -->
+    <!-- end of profile edit modal -->
+
+    <!-- Adding Card Modal Start -->
+    <div class="modal">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h2 class="modal__heading">New Place</h2>
+        <form class="modal__form">
+          <input
+            type="text"
+            name="title"
+            class="modal__input modal__input_type_name"
+            placeholder="Title"
+            required
+          />
+          <input
+            type="text"
+            name="description"
+            class="modal__input modal__input_type_description"
+            placeholder="Image link"
+            required
+          />
+          <button type="submit" class="modal__save-button">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- End of card add modal -->
+
+    <!-- Templates start here -->
     <template id="cardElementTemplate">
       <li class="card">
         <img src="" alt="" class="card__image" />
