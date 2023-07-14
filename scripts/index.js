@@ -76,6 +76,8 @@ const inputImageLink = cardAddModal.querySelector(
   ".modal__input_type_description"
 );
 
+//--------Dom declarations for the like button -----------
+
 //----------------------FUNCTIONS --------------------------------------------------------
 
 //---profile edit functions----------
