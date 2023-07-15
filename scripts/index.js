@@ -1,4 +1,4 @@
-let initialCards = [
+const initialCards = [
   {
     name: "Yosemite Valley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
@@ -136,18 +136,17 @@ function saveAddCardChanges(evt) {
     name: name,
     link: link,
   };
-  initialCards = [];
+
+  cardsList.prepend(getCardElement(newCard));
+
   console.log(newCard);
-  initialCards.push(newCard);
-  initialCards.forEach((data) => {
-    cardsList.prepend(getCardElement(data));
-  });
 }
 
 //-- I made the above function work by changing the initial cards array to let from const.
 //-- Alternitively i could leave it const and use the for each method to clear the array
 //-- Maybe just making a new array and runing the for each on it  ??
 //-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
+//-- Senior student eexplained, running prepend and passing newcard instead of data
 
 //________________________________________________________________________________________________
 
