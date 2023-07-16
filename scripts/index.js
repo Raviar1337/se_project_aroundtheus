@@ -105,9 +105,22 @@ function getCardElement(data) {
   let cardElement = cardElementTemplate.cloneNode(true);
   let cardImageElement = cardElement.querySelector(".card__image");
   let cardTitleElement = cardElement.querySelector(".card__title");
+  let cardLikeButton = cardElement.querySelector(".card__like-button");
   cardTitleElement.textContent = data.name;
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
+
+  cardLikeButton.addEventListener("click", () => {
+    console.log("like button clicked through annonomys function");
+    if (!cardLikeButton.classList.contains("like-button-active")) {
+      console.log("returned true");
+      cardLikeButton.classList.add("like-button-active");
+    } else {
+      console.log("returned false");
+      cardLikeButton.classList.remove("like-button-active");
+    }
+  });
+
   return cardElement;
 }
 
@@ -148,6 +161,22 @@ function saveAddCardChanges(evt) {
 //-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
 //-- Senior student eexplained, running prepend and passing newcard instead of data
 
+//--- card like button function----
+
+// function cardLikeButtonInteract() {
+//   console.log("like button was clicked");
+
+//   let cardButtonImage = cardLikeButton.firstElementChild;
+
+//   if ((cardButtonImage.src = "./images/Cardlikebutton.svg")) {
+//     cardButtonImage.src = "./images/LikeButtonActive.svg";
+//   } else {
+//     cardButtonImage.src = "./images/Cardlikebutton.svg";
+//   }
+// }
+
+//-- Above is an artifact of trying to make a seprate like fuction instead of adding the ffunction to each button in the for each method
+
 //________________________________________________________________________________________________
 
 //------------------------ EVENTS ---------------------------------------------------------------
@@ -168,6 +197,8 @@ cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
 
 cardAddModalSaveButton.addEventListener("click", saveAddCardChanges);
 
+//---card like button events -------
+
 //________________________________________________________________________________________________
 
 //---- Nonsense that took to long to figure out because I wrote colneNode instead of cloneNode :( -----
@@ -175,3 +206,20 @@ cardAddModalSaveButton.addEventListener("click", saveAddCardChanges);
 initialCards.forEach((data) => {
   cardsList.prepend(getCardElement(data));
 });
+
+//--------Dom declarations and event setup for the like button -----------
+// const cardLikeButtons = document.querySelectorAll(".card__like-button");
+
+// cardLikeButtons.forEach((cardLikeButton) => {
+//   cardLikeButton.addEventListener("click", () => {
+//     console.log("like button clicked through annonomys function");
+//     if (!cardLikeButton.classList.contains("like-button-active")) {
+//       console.log("returned true");
+//       cardLikeButton.classList.add("like-button-active");
+//     } else {
+//       console.log("returned false");
+//       cardLikeButton.classList.remove("like-button-active");
+//     }
+//   });
+// });
+// -- Commented these out when I realised i could but the code into the getCardElement Function
