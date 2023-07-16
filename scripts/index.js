@@ -102,12 +102,14 @@ function saveEditProfileChanges(evt) {
 //---card loading function--------
 
 function getCardElement(data) {
-  let cardElement = cardElementTemplate.cloneNode(true);
-  let cardImageElement = cardElement.querySelector(".card__image");
-  let cardTitleElement = cardElement.querySelector(".card__title");
-  let cardLikeButton = cardElement.querySelector(".card__like-button");
-  let cardDeleteButton = cardElement.querySelector(".card__delete-button");
-  let cardLikeButtonImage = cardLikeButton.querySelector(".card__button-image");
+  const cardElement = cardElementTemplate.cloneNode(true);
+  const cardImageElement = cardElement.querySelector(".card__image");
+  const cardTitleElement = cardElement.querySelector(".card__title");
+  const cardLikeButton = cardElement.querySelector(".card__like-button");
+  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  const cardLikeButtonImage = cardLikeButton.querySelector(
+    ".card__button-image"
+  );
 
   cardTitleElement.textContent = data.name;
   cardImageElement.src = data.link;
