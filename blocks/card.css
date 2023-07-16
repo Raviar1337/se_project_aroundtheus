@@ -47,7 +47,7 @@
 }
 
 .like-button-active {
-  background-image: url(../images/LikeButtonActive.svg);
+  /* background-image: url(../images/LikeButtonActive.svg); */
   background-repeat: no-repeat;
   background-position: center;
 }

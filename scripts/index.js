@@ -103,11 +103,12 @@ function saveEditProfileChanges(evt) {
 
 function getCardElement(data) {
   let cardElement = cardElementTemplate.cloneNode(true);
-
   let cardImageElement = cardElement.querySelector(".card__image");
   let cardTitleElement = cardElement.querySelector(".card__title");
   let cardLikeButton = cardElement.querySelector(".card__like-button");
   let cardDeleteButton = cardElement.querySelector(".card__delete-button");
+  let cardLikeButtonImage = cardLikeButton.querySelector(".card__button-image");
+
   cardTitleElement.textContent = data.name;
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
@@ -122,9 +123,11 @@ function getCardElement(data) {
     if (!cardLikeButton.classList.contains("like-button-active")) {
       console.log("returned true");
       cardLikeButton.classList.add("like-button-active");
+      cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
     } else {
       console.log("returned false");
       cardLikeButton.classList.remove("like-button-active");
+      cardLikeButtonImage.src = "./images/Cardlikebutton.svg";
     }
   });
 
@@ -231,4 +234,4 @@ initialCards.forEach((data) => {
 // });
 // -- Commented these out when I realised i could put the code into the getCardElement Function
 
-//--delete button code ----
+//--delete button code also included in the get card element function----
