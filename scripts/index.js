@@ -103,12 +103,19 @@ function saveEditProfileChanges(evt) {
 
 function getCardElement(data) {
   let cardElement = cardElementTemplate.cloneNode(true);
+
   let cardImageElement = cardElement.querySelector(".card__image");
   let cardTitleElement = cardElement.querySelector(".card__title");
   let cardLikeButton = cardElement.querySelector(".card__like-button");
+  let cardDeleteButton = cardElement.querySelector(".card__delete-button");
   cardTitleElement.textContent = data.name;
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
+
+  cardDeleteButton.addEventListener("click", () => {
+    console.log("clicked the delete button");
+    cardElement.remove();
+  });
 
   cardLikeButton.addEventListener("click", () => {
     console.log("like button clicked through annonomys function");
@@ -222,4 +229,6 @@ initialCards.forEach((data) => {
 //     }
 //   });
 // });
-// -- Commented these out when I realised i could but the code into the getCardElement Function
+// -- Commented these out when I realised i could put the code into the getCardElement Function
+
+//--delete button code ----
