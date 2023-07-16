@@ -120,14 +120,18 @@ function getCardElement(data) {
 
   cardLikeButton.addEventListener("click", () => {
     console.log("like button clicked through annonomys function");
-    if (!cardLikeButton.classList.contains("like-button-active")) {
-      console.log("returned true");
-      cardLikeButton.classList.add("like-button-active");
-      cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
-    } else {
+    const isLiked = cardLikeButton.dataset.liked === "true";
+    console.log(isLiked);
+    if (isLiked) {
       console.log("returned false");
-      cardLikeButton.classList.remove("like-button-active");
+      cardLikeButton.dataset.liked = "false";
+      //cardLikeButton.classList.remove("like-button-active");
       cardLikeButtonImage.src = "./images/Cardlikebutton.svg";
+    } else {
+      console.log("returned true");
+      cardLikeButton.dataset.liked = "true";
+      // cardLikeButton.classList.add("like-button-active");
+      cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
     }
   });
 
