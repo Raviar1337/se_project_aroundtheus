@@ -1,5 +1,12 @@
 .devtool {
-  background-image: url(../images/LikeButtonActive.svg);
-  background-repeat: no-repeat;
-  background-position: center;
+  display: flex;
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.devtool2 {
+  padding: 0;
+  max-width: 75vw;
+  max-height: 75vh;
 }

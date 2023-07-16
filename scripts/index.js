@@ -76,7 +76,13 @@ const inputImageLink = cardAddModal.querySelector(
   ".modal__input_type_description"
 );
 
-//--------Dom declarations for the like button -----------
+//--------Dom declarations for opening a modal -----------
+
+const cardOpenModal = arrModal[2];
+
+const cardOpenModalCloseButton = cardOpenModal.querySelector(
+  ".modal__close-button"
+);
 
 //----------------------FUNCTIONS --------------------------------------------------------
 
@@ -114,6 +120,13 @@ function getCardElement(data) {
   cardTitleElement.textContent = data.name;
   cardImageElement.src = data.link;
   cardImageElement.alt = data.name;
+
+  cardImageElement.addEventListener("click", () => {
+    const cardOpenModalImage = document.querySelector(".modal__opened-image");
+    cardOpenModal.classList.add("modal_opened");
+    cardOpenModalImage.src = cardImageElement.src;
+    console.log("card image was opened");
+  });
 
   cardDeleteButton.addEventListener("click", () => {
     console.log("clicked the delete button");
@@ -189,6 +202,17 @@ function saveAddCardChanges(evt) {
 
 //-- Above is an artifact of trying to make a seprate like fuction instead of adding the ffunction to each button in the for each method
 
+//-- cardOpenModal Functions -----
+
+function openCardOpenModal() {
+  cardOpenModal.classList.add("modal_opened");
+  console.log("card image was opened");
+}
+
+function closeCardOpenModal() {
+  cardOpenModal.classList.remove("modal_opened");
+}
+
 //________________________________________________________________________________________________
 
 //------------------------ EVENTS ---------------------------------------------------------------
@@ -209,7 +233,9 @@ cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
 
 cardAddModalSaveButton.addEventListener("click", saveAddCardChanges);
 
-//---card like button events -------
+//---card Open modal events -------
+
+cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 
 //________________________________________________________________________________________________
 
