@@ -123,8 +123,14 @@ function getCardElement(data) {
 
   cardImageElement.addEventListener("click", () => {
     const cardOpenModalImage = document.querySelector(".modal__opened-image");
-    cardOpenModal.classList.add("modal_opened");
+    const cardOpenModalText = document.querySelector(
+      ".modal__heading_type_open-image"
+    );
+
+    cardOpenModalText.textContent = cardTitleElement.textContent;
     cardOpenModalImage.src = cardImageElement.src;
+    cardOpenModal.classList.add("modal_opened");
+
     console.log("card image was opened");
   });
 

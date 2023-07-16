@@ -121,6 +121,8 @@
   padding: 0;
   border-radius: 0;
   background-color: transparent;
+  max-width: 75vw;
+  max-height: 75vh;
 }
 
 .modal__heading_type_open-image {
@@ -130,4 +132,6 @@
   line-height: 15px;
   letter-spacing: 0em;
   margin: 0;
+  padding-top: 10px;
+  color: #ffffff;
 }
