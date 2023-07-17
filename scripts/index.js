@@ -213,6 +213,7 @@ function saveAddCardChanges(evt) {
 function openCardOpenModal() {
   cardOpenModal.classList.add("modal_opened");
   console.log("card image was opened");
+  console.log("there was a delay?");
 }
 
 function closeCardOpenModal() {

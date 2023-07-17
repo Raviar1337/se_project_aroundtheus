@@ -9,7 +9,8 @@
 }
 
 .modal {
-  display: none;
+  display: flex;
+  visibility: hidden;
   position: fixed;
   top: 0;
   left: 0;
@@ -17,14 +18,17 @@
   right: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 9001;
+  opacity: 0;
+  transition: visibility 0.5s, opacity 0.5s;
 }
 
 .modal_opened {
-  display: flex;
-  animation: smoothopen 500ms;
+  visibility: visible;
+  opacity: 1;
 }
 
 .modal_closed {
+  display: flex;
   animation: smoothopen 500ms reverse;
 }
 
