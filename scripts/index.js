@@ -72,9 +72,11 @@ const cardAddModalCloseButton = cardAddModal.querySelector(
   ".modal__close-button"
 );
 
-const cardAddModalSaveButton = cardAddModal.querySelector(
-  ".modal__save-button"
-);
+// const cardAddModalSaveButton = cardAddModal.querySelector(
+//   ".modal__save-button"
+// );   This was removed because instead of a save button, the submit evennty listener on the form is better
+
+const cardAddModalForm = cardAddModal.querySelector(".modal__form");
 
 const inputCardName = cardAddModal.querySelector(".modal__input_type_name");
 
@@ -175,8 +177,6 @@ function openCardAddModal() {
 
 function closeCardAddModal() {
   closeModal(cardAddModal);
-  inputCardName.value = "";
-  inputImageLink.value = "";
 }
 
 function saveAddCardChanges(evt) {
@@ -186,7 +186,7 @@ function saveAddCardChanges(evt) {
   const link = inputImageLink.value;
   inputCardName.value = "";
   inputImageLink.value = "";
-  let newCard = {
+  const newCard = {
     name: name,
     link: link,
   };
@@ -244,7 +244,7 @@ cardModalAddButton.addEventListener("click", openCardAddModal);
 
 cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
 
-cardAddModalSaveButton.addEventListener("click", saveAddCardChanges);
+cardAddModalForm.addEventListener("submit", saveAddCardChanges);
 
 //---card Open modal events -------
 
