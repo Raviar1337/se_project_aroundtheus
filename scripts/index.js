@@ -27,9 +27,11 @@ const initialCards = [
 
 //----------------- DOM DECLARATIONS For profile edit modal ------------------------------------------------
 
-const profileEditModal = document.querySelector(".modal");
+const profileEditModal = document.querySelector(".modal_profile-edit");
 
-const profileModalCloseButton = document.querySelector(".modal__close-button");
+const profileModalCloseButton = profileEditModal.querySelector(
+  ".modal__close-button"
+);
 
 const profileModalEditButton = document.querySelector(".edit-button");
 
@@ -37,15 +39,21 @@ const profileName = document.querySelector(".profile__title");
 
 const profileDescription = document.querySelector(".profile__description");
 
-const inputProfileName = document.querySelector(".modal__input_type_name");
+const inputProfileName = profileEditModal.querySelector(
+  ".modal__input_type_name"
+);
 
-const inputProfileDescription = document.querySelector(
+const inputProfileDescription = profileEditModal.querySelector(
   ".modal__input_type_description"
 );
 
-const modalSaveButton = document.querySelector(".modal__save-button");
+const modalProfileSaveButton = profileEditModal.querySelector(
+  ".modal__save-button"
+);
 
-const modalForm = document.querySelector(".modal__form");
+const modalProfileForm = profileEditModal.querySelector(".modal__form");
+
+//---- Template declarations ---
 
 const cardElementTemplate = document.querySelector("#cardElementTemplate")
   .content.firstElementChild;
@@ -56,11 +64,9 @@ const cardsList = document.querySelector(".cards__list");
 
 //-----DOM Declarations for adding cards -------------------------------------------------------------
 
-const arrModal = document.querySelectorAll(".modal");
-
 const cardModalAddButton = document.querySelector(".add-button");
 
-const cardAddModal = arrModal[1];
+const cardAddModal = document.querySelector(".modal_card-add");
 
 const cardAddModalCloseButton = cardAddModal.querySelector(
   ".modal__close-button"
@@ -78,29 +84,36 @@ const inputImageLink = cardAddModal.querySelector(
 
 //--------Dom declarations for opening a modal -----------
 
-const cardOpenModal = arrModal[2];
+const cardOpenModal = document.querySelector(".modal_card-open");
 
 const cardOpenModalCloseButton = cardOpenModal.querySelector(
   ".modal__close-button"
 );
 
 //----------------------FUNCTIONS --------------------------------------------------------
+function openModal(popup) {
+  popup.classList.add("modal_opened");
+}
 
-//---profile edit functions----------
+function closeModal(popup) {
+  popup.classList.remove("modal_opened");
+}
 
-function openModal() {
-  profileEditModal.classList.add("modal_opened");
+//-- edit -profile functions----------
+
+function openEditProfileModal() {
+  openModal(profileEditModal);
   inputProfileName.value = profileName.textContent;
   inputProfileDescription.value = profileDescription.textContent;
 }
 
-function closeModal() {
-  profileEditModal.classList.remove("modal_opened");
+function closeEditProfileModal() {
+  closeModal(profileEditModal);
 }
 
 function saveEditProfileChanges(evt) {
   evt.preventDefault();
-  profileEditModal.classList.remove("modal_opened");
+  closeModal(profileEditModal);
   profileName.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
 }
@@ -129,9 +142,8 @@ function getCardElement(data) {
 
     cardOpenModalText.textContent = cardTitleElement.textContent;
     cardOpenModalImage.src = cardImageElement.src;
-    cardOpenModal.classList.add("modal_opened");
-
-    console.log("card image was opened");
+    cardOpenModalImage.alt = `Photo of ${data.name}`;
+    openModal(cardOpenModal);
   });
 
   cardDeleteButton.addEventListener("click", () => {
@@ -158,32 +170,28 @@ function getCardElement(data) {
 //---add card functions-------------
 
 function openCardAddModal() {
-  cardAddModal.classList.add("modal_opened");
+  openModal(cardAddModal);
 }
 
 function closeCardAddModal() {
-  cardAddModal.classList.remove("modal_opened");
+  closeModal(cardAddModal);
   inputCardName.value = "";
   inputImageLink.value = "";
 }
 
 function saveAddCardChanges(evt) {
   evt.preventDefault();
-  cardAddModal.classList.remove("modal_opened");
-  let name = inputCardName.value;
-  let link = inputImageLink.value;
+  closeModal(cardAddModal);
+  const name = inputCardName.value;
+  const link = inputImageLink.value;
   inputCardName.value = "";
   inputImageLink.value = "";
-  console.log(name);
-  console.log(link);
   let newCard = {
     name: name,
     link: link,
   };
 
   cardsList.prepend(getCardElement(newCard));
-
-  console.log(newCard);
 }
 
 //-- I made the above function work by changing the initial cards array to let from const.
@@ -211,13 +219,11 @@ function saveAddCardChanges(evt) {
 //-- cardOpenModal Functions -----
 
 function openCardOpenModal() {
-  cardOpenModal.classList.add("modal_opened");
-  console.log("card image was opened");
-  console.log("there was a delay?");
+  openModal(cardOpenModal);
 }
 
 function closeCardOpenModal() {
-  cardOpenModal.classList.remove("modal_opened");
+  closeModal(cardOpenModal);
 }
 
 //________________________________________________________________________________________________
@@ -226,11 +232,11 @@ function closeCardOpenModal() {
 
 //---profile edit modal events
 
-profileModalEditButton.addEventListener("click", openModal);
+profileModalEditButton.addEventListener("click", openEditProfileModal);
 
-profileModalCloseButton.addEventListener("click", closeModal);
+profileModalCloseButton.addEventListener("click", closeEditProfileModal);
 
-modalForm.addEventListener("submit", saveEditProfileChanges);
+modalProfileForm.addEventListener("submit", saveEditProfileChanges);
 
 //---card add modal events---------
 
