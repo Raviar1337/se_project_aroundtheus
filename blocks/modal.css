@@ -92,6 +92,10 @@
   border-bottom: 2px solid rgba(0, 0, 0, 0.2);
 }
 
+.modal__input_invalid {
+  border-bottom: 1px solid red;
+}
+
 .modal__save-button {
   border-style: none;
   padding: 0;
@@ -106,6 +110,14 @@
   background: #000000;
   border-radius: 2px;
   cursor: pointer;
+}
+
+.modal__save-button_disabled {
+  background: #ffffff;
+  color: rgba(0, 0, 0, 0.2);
+  border-width: 1px;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
 }
 
 .modal__save-button:hover {
