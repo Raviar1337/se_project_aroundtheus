@@ -25,7 +25,13 @@ const initialCards = [
   },
 ];
 
-//closeModal(popup)
+document.addEventListener("keydown", (evt) => {
+  console.log(evt.key);
+  let currentlyOpenModal = document.querySelector(".modal_opened");
+  if (evt.key === "Escape") {
+    closeModal(currentlyOpenModal);
+  }
+});
 /// ----- closing modal by clicking off of it feture --------------------------
 
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
