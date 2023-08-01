@@ -25,6 +25,26 @@ const initialCards = [
   },
 ];
 
+//closeModal(popup)
+/// ----- closing modal by clicking off of it feture --------------------------
+
+const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
+
+const enableClosingModalFeture = (modalBackgrounds) => {
+  modalBackgrounds.forEach((background) => {
+    background.addEventListener("click", (evt) => {
+      if (evt.target === background) {
+        console.log("It will close");
+        closeModal(background);
+      } else {
+        console.log("Not GOnna Close", evt.target, background);
+      }
+    });
+  });
+};
+
+enableClosingModalFeture(modalBackgrounds);
+
 //----------------- DOM DECLARATIONS For profile edit modal ------------------------------------------------
 
 const profileEditModal = document.querySelector(".modal_profile-edit");
