@@ -4,10 +4,12 @@
 
 const disableSubmitButton = (formButton, options) => {
   formButton.classList.add(options.inactiveButtonClass);
+  formButton.disabled = true;
 };
 
 const enableSubmitButton = (formButton, options) => {
   formButton.classList.remove(options.inactiveButtonClass);
+  formButton.disabled = false;
 };
 
 //re add this perameter to showError  formInputElement,  , errorMessage
@@ -21,10 +23,11 @@ const showInputError = (options, input, errorMessage) => {
 
 //re add to hideInputError formElement,
 
-const hideInputError = (input) => {
-  input.classList.remove("modal__input_invalid");
-  // formError.classList.remove("form__input-error_active");
-  // formError.textContent = "";
+const hideInputError = (options, input) => {
+  const formError = document.querySelector(`#${input.id}-error`);
+  input.classList.remove(options.inputErrorClass);
+  formError.textContent = "";
+  formError.classList.remove(options.errorClass);
 };
 
 // Re add this parameter to checkInputValidity formElement,
@@ -32,13 +35,12 @@ const hideInputError = (input) => {
 const checkInputValidity = (formButton, inputElement, options) => {
   if (!inputElement.validity.valid) {
     console.log("NOT VALID!!!!");
-    //showInputError(inputElement);
     disableSubmitButton(formButton, options);
     showInputError(options, inputElement, inputElement.validationMessage);
   } else {
     console.log("VALID!!!!");
-    hideInputError(inputElement);
-    //hideInputError(formElement, inputElement);
+    hideInputError(options, inputElement);
+    enableSubmitButton(formButton, options);
   }
 };
 
