@@ -32,7 +32,7 @@ const hideInputError = (options, input) => {
 
 // Re add this parameter to checkInputValidity formElement,
 
-const checkInputValidity = (formButton, inputElement, options) => {
+const checkInputValidity = (inputElement, options) => {
   if (!inputElement.validity.valid) {
     console.log("NOT VALID!!!!");
 
@@ -66,7 +66,7 @@ function setEventListeners(formElement, options) {
   formInput.forEach((input) => {
     input.addEventListener("keyup", function (evt) {
       console.log(evt.target);
-      checkInputValidity(formButton, evt.target, options);
+      checkInputValidity(evt.target, options);
       formButtonToggle(formButton, formInput, options);
     });
   });

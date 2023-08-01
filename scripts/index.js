@@ -72,9 +72,9 @@ const cardAddModalCloseButton = cardAddModal.querySelector(
   ".modal__close-button"
 );
 
-// const cardAddModalSaveButton = cardAddModal.querySelector(
-//   ".modal__save-button"
-// );   This was removed because instead of a save button, the submit evennty listener on the form is better
+const cardAddModalSaveButton = cardAddModal.querySelector(
+  ".modal__save-button"
+); //This was removed because instead of a save button, the submit evennty listener on the form is better and re added for validation reasons
 
 const cardAddModalForm = cardAddModal.querySelector(".modal__form");
 
@@ -173,6 +173,7 @@ function getCardElement(data) {
 
 function openCardAddModal() {
   openModal(cardAddModal);
+  disableSubmitButton(cardAddModalSaveButton, config);
 }
 
 function closeCardAddModal() {
