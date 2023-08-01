@@ -35,11 +35,25 @@ const hideInputError = (options, input) => {
 const checkInputValidity = (formButton, inputElement, options) => {
   if (!inputElement.validity.valid) {
     console.log("NOT VALID!!!!");
-    disableSubmitButton(formButton, options);
+
     showInputError(options, inputElement, inputElement.validationMessage);
   } else {
     console.log("VALID!!!!");
     hideInputError(options, inputElement);
+  }
+};
+
+const formButtonToggle = (formButton, formInput, options) => {
+  let invalidInputPresent = false;
+  formInput.forEach((input) => {
+    if (!input.validity.valid) {
+      invalidInputPresent = true;
+    }
+  });
+
+  if (invalidInputPresent) {
+    disableSubmitButton(formButton, options);
+  } else {
     enableSubmitButton(formButton, options);
   }
 };
@@ -53,6 +67,7 @@ function setEventListeners(formElement, options) {
     input.addEventListener("keyup", function (evt) {
       console.log(evt.target);
       checkInputValidity(formButton, evt.target, options);
+      formButtonToggle(formButton, formInput, options);
     });
   });
 }
@@ -61,10 +76,6 @@ function enableValidation(options) {
   const formElements = Array.from(
     document.querySelectorAll(options.formSelector)
   );
-
-  // const formError = Array.from(
-  //   document.querySelectorAll(`.${formInput.id}-error`)
-  // );
 
   formElements.forEach((formElement) => {
     console.log(formElement);
