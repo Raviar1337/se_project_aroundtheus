@@ -25,8 +25,9 @@ const initialCards = [
   },
 ];
 
+//------- Close Modal with escape feture -------------------------------------------------=-
+
 document.addEventListener("keydown", (evt) => {
-  console.log(evt.key);
   let currentlyOpenModal = document.querySelector(".modal_opened");
   if (evt.key === "Escape") {
     closeModal(currentlyOpenModal);
@@ -40,10 +41,7 @@ const enableClosingModalFeture = (modalBackgrounds) => {
   modalBackgrounds.forEach((background) => {
     background.addEventListener("click", (evt) => {
       if (evt.target === background) {
-        console.log("It will close");
         closeModal(background);
-      } else {
-        console.log("Not GOnna Close", evt.target, background);
       }
     });
   });

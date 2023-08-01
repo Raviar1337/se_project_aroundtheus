@@ -1,7 +1,3 @@
-// const formElement = document.querySelector(".form");
-// const formInput = formElement.querySelector(".form__input");
-// const formError = formElement.querySelector(`.${formInput.id}-error`);
-
 const disableSubmitButton = (formButton, options) => {
   formButton.classList.add(options.inactiveButtonClass);
   formButton.disabled = true;
@@ -12,16 +8,12 @@ const enableSubmitButton = (formButton, options) => {
   formButton.disabled = false;
 };
 
-//re add this perameter to showError  formInputElement,  , errorMessage
-
 const showInputError = (options, input, errorMessage) => {
   const formError = document.querySelector(`#${input.id}-error`);
   input.classList.add(options.inputErrorClass);
   formError.textContent = errorMessage;
   formError.classList.add(options.errorClass);
 };
-
-//re add to hideInputError formElement,
 
 const hideInputError = (options, input) => {
   const formError = document.querySelector(`#${input.id}-error`);
@@ -30,15 +22,10 @@ const hideInputError = (options, input) => {
   formError.classList.remove(options.errorClass);
 };
 
-// Re add this parameter to checkInputValidity formElement,
-
 const checkInputValidity = (inputElement, options) => {
   if (!inputElement.validity.valid) {
-    console.log("NOT VALID!!!!");
-
     showInputError(options, inputElement, inputElement.validationMessage);
   } else {
-    console.log("VALID!!!!");
     hideInputError(options, inputElement);
   }
 };
@@ -65,7 +52,6 @@ function setEventListeners(formElement, options) {
   const formButton = formElement.querySelector(options.submitButtonSelector);
   formInput.forEach((input) => {
     input.addEventListener("keyup", function (evt) {
-      console.log(evt.target);
       checkInputValidity(evt.target, options);
       formButtonToggle(formButton, formInput, options);
     });
@@ -78,7 +64,6 @@ function enableValidation(options) {
   );
 
   formElements.forEach((formElement) => {
-    console.log(formElement);
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
@@ -96,6 +81,3 @@ const config = {
 };
 
 enableValidation(config);
-
-// console.log(formElements);
-// console.log(formInput);
