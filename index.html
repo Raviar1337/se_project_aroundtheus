@@ -55,25 +55,38 @@
     </div>
 
     <!-- Profile Edit Modal Start -->
+
     <div class="modal modal_profile-edit">
       <div class="modal__container">
         <button type="button" class="modal__close-button"></button>
         <h2 class="modal__heading">Edit Profile</h2>
-        <form class="modal__form">
+        <form class="modal__form" id="form__edit-profile" novalidate>
           <input
             type="text"
             name="title"
+            id="edit-profile__input_name"
             class="modal__input modal__input_type_name"
             placeholder="Name"
             required
+            minlength="2"
+            maxlength="40"
           />
+          <span id="edit-profile__input_name-error" class="modal__error"
+            >this is an error message</span
+          >
           <input
             type="text"
+            id="edit-profile__input_description"
             name="description"
             class="modal__input modal__input_type_description"
             placeholder="Description"
             required
+            minlength="2"
+            maxlength="200"
           />
+          <span id="edit-profile__input_description-error" class="modal__error"
+            >this is an error message</span
+          >
           <button type="submit" class="modal__save-button">Save</button>
         </form>
       </div>
@@ -85,16 +98,19 @@
       <div class="modal__container">
         <button type="button" class="modal__close-button"></button>
         <h2 class="modal__heading">New Place</h2>
-        <form class="modal__form">
+        <form class="modal__form" id="form__add-card">
           <input
             type="text"
+            id="card-add__input_title"
             name="title"
             class="modal__input modal__input_type_name"
             placeholder="Title"
             required
           />
+
           <input
             type="url"
+            id="card-add__input_url"
             name="url"
             class="modal__input modal__input_type_description"
             placeholder="Image link"

@@ -96,6 +96,20 @@
   border-bottom: 1px solid red;
 }
 
+.modal__error {
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0em;
+  text-align: left;
+  color: red;
+  display: none;
+}
+
+.modal__error_visible {
+  display: block;
+}
+
 .modal__save-button {
   border-style: none;
   padding: 0;
