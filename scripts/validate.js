@@ -30,15 +30,13 @@ const checkInputValidity = (inputElement, options) => {
   }
 };
 
-const formButtonToggle = (formButton, formInput, options) => {
-  let invalidInputPresent = false;
-  formInput.forEach((input) => {
-    if (!input.validity.valid) {
-      invalidInputPresent = true;
-    }
-  });
+const checkFormValidity = (formInput) =>
+  formInput.every((input) => input.validity.valid);
 
-  if (invalidInputPresent) {
+const formButtonToggle = (formButton, formInput, options) => {
+  const isFormValid = checkFormValidity(formInput);
+
+  if (!isFormValid) {
     disableSubmitButton(formButton, options);
   } else {
     enableSubmitButton(formButton, options);

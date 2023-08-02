@@ -27,19 +27,20 @@ const initialCards = [
 
 //------- Close Modal with escape feture -------------------------------------------------=-
 
-document.addEventListener("keydown", (evt) => {
-  let currentlyOpenModal = document.querySelector(".modal_opened");
+function closeModalByEscape(evt) {
   if (evt.key === "Escape") {
+    const currentlyOpenModal = document.querySelector(".modal_opened");
     closeModal(currentlyOpenModal);
   }
-});
+}
+
 /// ----- closing modal by clicking off of it feture --------------------------
 
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 const enableClosingModalFeture = (modalBackgrounds) => {
   modalBackgrounds.forEach((background) => {
-    background.addEventListener("click", (evt) => {
+    background.addEventListener("mousedown", (evt) => {
       if (evt.target === background) {
         closeModal(background);
       }
@@ -119,10 +120,12 @@ const cardOpenModalCloseButton = cardOpenModal.querySelector(
 //----------------------FUNCTIONS --------------------------------------------------------
 function openModal(popup) {
   popup.classList.add("modal_opened");
+  document.addEventListener("keydown", closeModalByEscape);
 }
 
 function closeModal(popup) {
   popup.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeModalByEscape);
 }
 
 //-- edit -profile functions----------
