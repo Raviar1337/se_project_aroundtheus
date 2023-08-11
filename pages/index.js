@@ -230,8 +230,8 @@ function saveAddCardChanges(evt) {
     name: name,
     link: link,
   };
-
-  cardsList.prepend(getCardElement(newCard));
+  const card = new Card(newCard);
+  cardsList.prepend(card.getCardElement());
 }
 
 //-- I made the above function work by changing the initial cards array to let from const.
