@@ -25,29 +25,40 @@ const initialCards = [
   },
 ];
 
+//------ IMPORTED CODE ------------------------
+import Card from "../components/Card.js";
+
+import {
+  openModal,
+  closeModal,
+  enableClosingModalFeture,
+  closeModalByEscape,
+} from "../utils/utils.js";
+
 //------- Close Modal with escape feture -------------------------------------------------=-
-
-function closeModalByEscape(evt) {
-  if (evt.key === "Escape") {
-    const currentlyOpenModal = document.querySelector(".modal_opened");
-    closeModal(currentlyOpenModal);
-  }
-}
-
+// ---- -- -- moved to utils.js
+// function closeModalByEscape(evt) {
+//   if (evt.key === "Escape") {
+//     const currentlyOpenModal = document.querySelector(".modal_opened");
+//     closeModal(currentlyOpenModal);
+//   }
+// }
+//-------------------
 /// ----- closing modal by clicking off of it feture --------------------------
 
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
-const enableClosingModalFeture = (modalBackgrounds) => {
-  modalBackgrounds.forEach((background) => {
-    background.addEventListener("mousedown", (evt) => {
-      if (evt.target === background) {
-        closeModal(background);
-      }
-    });
-  });
-};
-
+// ---- -- -- moved to utils.js
+// const enableClosingModalFeture = (modalBackgrounds) => {
+//   modalBackgrounds.forEach((background) => {
+//     background.addEventListener("mousedown", (evt) => {
+//       if (evt.target === background) {
+//         closeModal(background);
+//       }
+//     });
+//   });
+// };
+//---------------
 enableClosingModalFeture(modalBackgrounds);
 
 //----------------- DOM DECLARATIONS For profile edit modal ------------------------------------------------
@@ -79,10 +90,10 @@ const modalProfileSaveButton = profileEditModal.querySelector(
 const modalProfileForm = profileEditModal.querySelector(".modal__form");
 
 //---- Template declarations ---
-
-const cardElementTemplate = document.querySelector("#cardElementTemplate")
-  .content.firstElementChild;
-
+//----- moved  to card.js --
+// const cardElementTemplate = document.querySelector("#cardElementTemplate")
+//   .content.firstElementChild;
+//--------------
 const cardsList = document.querySelector(".cards__list");
 
 //_________________________________________________________________________________________
@@ -118,16 +129,17 @@ const cardOpenModalCloseButton = cardOpenModal.querySelector(
 );
 
 //----------------------FUNCTIONS --------------------------------------------------------
-function openModal(popup) {
-  popup.classList.add("modal_opened");
-  document.addEventListener("keydown", closeModalByEscape);
-}
+// ---- -- -- moved to utils.js
+// function openModal(popup) {
+//   popup.classList.add("modal_opened");
+//   document.addEventListener("keydown", closeModalByEscape);
+// }
 
-function closeModal(popup) {
-  popup.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeModalByEscape);
-}
-
+// function closeModal(popup) {
+//   popup.classList.remove("modal_opened");
+//   document.removeEventListener("keydown", closeModalByEscape);
+// }
+//------------------
 //-- edit -profile functions----------
 
 function openEditProfileModal() {
@@ -148,54 +160,54 @@ function saveEditProfileChanges(evt) {
 }
 
 //---card loading function--------
+//----- Moved to Card.js -- ---------
+// function getCardElement(data) {
+//   const cardElement = cardElementTemplate.cloneNode(true);
+//   const cardImageElement = cardElement.querySelector(".card__image");
+//   const cardTitleElement = cardElement.querySelector(".card__title");
+//   const cardLikeButton = cardElement.querySelector(".card__like-button");
+//   const cardDeleteButton = cardElement.querySelector(".card__delete-button");
+//   const cardLikeButtonImage = cardLikeButton.querySelector(
+//     ".card__button-image"
+//   );
 
-function getCardElement(data) {
-  const cardElement = cardElementTemplate.cloneNode(true);
-  const cardImageElement = cardElement.querySelector(".card__image");
-  const cardTitleElement = cardElement.querySelector(".card__title");
-  const cardLikeButton = cardElement.querySelector(".card__like-button");
-  const cardDeleteButton = cardElement.querySelector(".card__delete-button");
-  const cardLikeButtonImage = cardLikeButton.querySelector(
-    ".card__button-image"
-  );
+//   cardTitleElement.textContent = data.name;
+//   cardImageElement.src = data.link;
+//   cardImageElement.alt = data.name;
 
-  cardTitleElement.textContent = data.name;
-  cardImageElement.src = data.link;
-  cardImageElement.alt = data.name;
+//   cardImageElement.addEventListener("click", () => {
+//     const cardOpenModalImage = document.querySelector(".modal__opened-image");
+//     const cardOpenModalText = document.querySelector(
+//       ".modal__heading_type_open-image"
+//     );
 
-  cardImageElement.addEventListener("click", () => {
-    const cardOpenModalImage = document.querySelector(".modal__opened-image");
-    const cardOpenModalText = document.querySelector(
-      ".modal__heading_type_open-image"
-    );
+//     cardOpenModalText.textContent = cardTitleElement.textContent;
+//     cardOpenModalImage.src = cardImageElement.src;
+//     cardOpenModalImage.alt = `Photo of ${data.name}`;
+//     openModal(cardOpenModal);
+//   });
 
-    cardOpenModalText.textContent = cardTitleElement.textContent;
-    cardOpenModalImage.src = cardImageElement.src;
-    cardOpenModalImage.alt = `Photo of ${data.name}`;
-    openModal(cardOpenModal);
-  });
+//   cardDeleteButton.addEventListener("click", () => {
+//     console.log("clicked the delete button");
+//     cardElement.remove();
+//   });
 
-  cardDeleteButton.addEventListener("click", () => {
-    console.log("clicked the delete button");
-    cardElement.remove();
-  });
+//   cardLikeButton.addEventListener("click", () => {
+//     const isLiked = cardLikeButton.dataset.liked === "true";
 
-  cardLikeButton.addEventListener("click", () => {
-    const isLiked = cardLikeButton.dataset.liked === "true";
+//     if (isLiked) {
+//       cardLikeButton.dataset.liked = "false";
+//       cardLikeButtonImage.src = "./images/Cardlikebutton.svg";
+//       return;
+//     }
 
-    if (isLiked) {
-      cardLikeButton.dataset.liked = "false";
-      cardLikeButtonImage.src = "./images/Cardlikebutton.svg";
-      return;
-    }
+//     cardLikeButton.dataset.liked = "true";
+//     cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
+//   });
 
-    cardLikeButton.dataset.liked = "true";
-    cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
-  });
-
-  return cardElement;
-}
-
+//   return cardElement;
+// }
+//--------------------------
 //---add card functions-------------
 
 function openCardAddModal() {
@@ -283,7 +295,8 @@ cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 //---- Nonsense that took to long to figure out because I wrote colneNode instead of cloneNode :( -----
 
 initialCards.forEach((data) => {
-  cardsList.prepend(getCardElement(data));
+  const card = new Card(data);
+  cardsList.prepend(card.getCardElement());
 });
 
 //--------Dom declarations and event setup for the like button -----------
