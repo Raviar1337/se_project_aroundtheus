@@ -223,6 +223,7 @@ function closeCardAddModal() {
 function saveAddCardChanges(evt) {
   evt.preventDefault();
   closeModal(cardAddModal);
+
   const name = inputCardName.value;
   const link = inputImageLink.value;
   inputCardName.value = "";
@@ -231,7 +232,7 @@ function saveAddCardChanges(evt) {
     name: name,
     link: link,
   };
-  const card = new Card(newCard);
+  const card = new Card(newCard, "#cardElementTemplate");
   cardsList.prepend(card.getCardElement());
 }
 
@@ -243,17 +244,17 @@ function saveAddCardChanges(evt) {
 
 //--- card like button function----
 
-// function cardLikeButtonInteract() {
-//   console.log("like button was clicked");
+function cardLikeButtonInteract() {
+  console.log("like button was clicked");
 
-//   let cardButtonImage = cardLikeButton.firstElementChild;
+  let cardButtonImage = cardLikeButton.firstElementChild;
 
-//   if ((cardButtonImage.src = "./images/Cardlikebutton.svg")) {
-//     cardButtonImage.src = "./images/LikeButtonActive.svg";
-//   } else {
-//     cardButtonImage.src = "./images/Cardlikebutton.svg";
-//   }
-// }
+  if ((cardButtonImage.src = "./images/Cardlikebutton.svg")) {
+    cardButtonImage.src = "./images/LikeButtonActive.svg";
+  } else {
+    cardButtonImage.src = "./images/Cardlikebutton.svg";
+  }
+}
 
 //-- Above is an artifact of trying to make a seprate like fuction instead of adding the ffunction to each button in the for each method
 
@@ -296,7 +297,7 @@ cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 //---- Nonsense that took to long to figure out because I wrote colneNode instead of cloneNode :( -----
 
 initialCards.forEach((data) => {
-  const card = new Card(data);
+  const card = new Card(data, "#cardElementTemplate");
   cardsList.prepend(card.getCardElement());
 });
 
