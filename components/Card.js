@@ -4,9 +4,15 @@ export default class Card {
   constructor(data) {
     this._name = data.name;
     this._link = data.link;
+    // this._templateSelector = data.template  ?? maybe  this ?
   }
 
+  //---- private method for each event handler goes here
+
+  //---- private methods for working with markup and adding event handlers goes here
+
   getCardElement() {
+    const cardOpenModal = document.querySelector(".modal_card-open");
     const cardElementTemplate = document.querySelector("#cardElementTemplate")
       .content.firstElementChild;
     this._cardElement = cardElementTemplate.cloneNode(true);
@@ -59,3 +65,5 @@ export default class Card {
     return this._cardElement;
   }
 }
+
+import { openModal } from "../utils/utils.js";

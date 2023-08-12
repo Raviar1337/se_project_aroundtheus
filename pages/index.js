@@ -26,7 +26,6 @@ const initialCards = [
 ];
 
 //------ IMPORTED CODE ------------------------
-import Card from "../components/Card.js";
 
 import {
   openModal,
@@ -34,6 +33,8 @@ import {
   enableClosingModalFeture,
   closeModalByEscape,
 } from "../utils/utils.js";
+
+import Card from "../components/Card.js";
 
 //------- Close Modal with escape feture -------------------------------------------------=-
 // ---- -- -- moved to utils.js
@@ -110,7 +111,7 @@ const cardAddModalCloseButton = cardAddModal.querySelector(
 
 const cardAddModalSaveButton = cardAddModal.querySelector(
   ".modal__save-button"
-); //This was removed because instead of a save button, the submit evennty listener on the form is better and re added for validation reasons
+); //This was removed because instead of a save button, the submit evennty listener on the form is better ,later  re added for validation reasons
 
 const cardAddModalForm = cardAddModal.querySelector(".modal__form");
 
