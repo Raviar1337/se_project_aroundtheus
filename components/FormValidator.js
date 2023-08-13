@@ -1,6 +1,6 @@
 //---- code for the FormValidator class will go here----
 
-export default class FormValidator {
+export class FormValidator {
   constructor(settings, formElement) {
     this._settings = settings;
     this._formElement = formElement;
@@ -12,6 +12,18 @@ export default class FormValidator {
 
   _hideInputError() {
     console.log("hide input error code should be here");
+  }
+
+  _disableSubmitButton() {
+    console.log("disable submit button");
+    this._formButton.classList.add(this._settings.inactiveButtonClass);
+    this._formButton.disabled = true;
+  }
+
+  _enableSubmitButton() {
+    console.log("enable submit button");
+    this._formButton.classList.remove(this._settings.inactiveButtonClass);
+    this._formButton.disabled = false;
   }
 
   _checkFieldValidity(inputElement) {
@@ -26,7 +38,19 @@ export default class FormValidator {
     }
   }
 
-  _toggleSubmitButtonActive() {}
+  _checkFormValidity(formInput) {
+    return formInput.every((input) => input.validity.valid);
+  }
+
+  _toggleSubmitButtonActive(formButton, formInput) {
+    const isFormValid = this._checkFormValidity(formInput);
+
+    if (!isFormValid) {
+      this._disableSubmitButton(formButton);
+    } else {
+      this._enableSubmitButton(formButton);
+    }
+  }
 
   _setFormEventListeners() {
     this._formElement.addEventListener("submit", (evt) => {
@@ -34,15 +58,15 @@ export default class FormValidator {
     });
 
     const formInput = Array.from(
-      this._formElement.querySelectorAll(this.settings.inputSelector)
+      this._formElement.querySelectorAll(this._settings.inputSelector)
     );
-    const formButton = this._formElement.querySelector(
+    this._formButton = this._formElement.querySelector(
       this._settings.submitButtonSelector
     );
     formInput.forEach((input) => {
-      input.addEventListener("keyup", function (evt) {
+      input.addEventListener("keyup", (evt) => {
         this._checkFieldValidity(evt.target);
-        this._toggleSubmitButtonActive(formButton, formInput, this._settings);
+        this._toggleSubmitButtonActive(this._formButton, formInput);
       });
     });
   }

@@ -1,12 +1,12 @@
-const disableSubmitButton = (formButton, settings) => {
-  formButton.classList.add(settings.inactiveButtonClass);
-  formButton.disabled = true;
-};
+// const disableSubmitButton = (formButton, settings) => {
+//   formButton.classList.add(settings.inactiveButtonClass);
+//   formButton.disabled = true;
+// };
 
-const enableSubmitButton = (formButton, settings) => {
-  formButton.classList.remove(settings.inactiveButtonClass);
-  formButton.disabled = false;
-};
+// const enableSubmitButton = (formButton, settings) => {
+//   formButton.classList.remove(settings.inactiveButtonClass);
+//   formButton.disabled = false;
+// };
 
 const showInputError = (settings, input, errorMessage) => {
   const formError = document.querySelector(`#${input.id}-error`);
@@ -56,26 +56,26 @@ formButtonToggle(formButton, formInput, settings);
 //   });
 // }
 
-function enableValidation(settings) {
-  const formElements = Array.from(
-    document.querySelectorAll(settings.formSelector)
-  );
+// function enableValidation(settings) {
+//   const formElements = Array.from(
+//     document.querySelectorAll(settings.formSelector)
+//   );
 
-  formElements.forEach((formElement) => {
-    formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
-    setEventListeners(formElement, settings);
-  });
-}
+//   formElements.forEach((formElement) => {
+//     formElement.addEventListener("submit", (evt) => {
+//       evt.preventDefault();
+//     });
+//     setEventListeners(formElement, settings);
+//   });
+// }
 
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
-  inactiveButtonClass: "modal__save-button_disabled",
-  inputErrorClass: "modal__input_invalid",
-  errorClass: "modal__error_visible",
-};
+// const config = {
+//   formSelector: ".modal__form",
+//   inputSelector: ".modal__input",
+//   submitButtonSelector: ".modal__save-button",
+//   inactiveButtonClass: "modal__save-button_disabled",
+//   inputErrorClass: "modal__input_invalid",
+//   errorClass: "modal__error_visible",
+// };
 
-enableValidation(config);
+// enableValidation(config);

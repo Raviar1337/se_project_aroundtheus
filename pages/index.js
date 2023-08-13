@@ -38,7 +38,28 @@ import {
 
 import Card from "../components/Card.js";
 
-import FormValidator from "../components/FormValidator.js";
+import { FormValidator } from "../components/FormValidator.js";
+
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_invalid",
+  errorClass: "modal__error_visible",
+};
+
+const formElements = Array.from(document.querySelectorAll(".modal__form"));
+
+const disableSubmitButton = (formButton, settings) => {
+  formButton.classList.add(settings.inactiveButtonClass);
+  formButton.disabled = true;
+};
+
+const enableSubmitButton = (formButton, settings) => {
+  formButton.classList.remove(settings.inactiveButtonClass);
+  formButton.disabled = false;
+};
 
 /* -------------------------------------------------------------------------- */
 /*            /// ----- closing modal by clicking off of it feture            */
@@ -220,4 +241,9 @@ cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 initialCards.forEach((data) => {
   const card = new Card(data, "#cardElementTemplate");
   cardsList.prepend(card.getCardElement());
+});
+
+formElements.forEach((formElement) => {
+  const formValidator = new FormValidator(config, formElement);
+  formValidator.enableValidation();
 });
