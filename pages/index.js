@@ -56,10 +56,10 @@ const disableSubmitButton = (formButton, settings) => {
   formButton.disabled = true;
 };
 
-const enableSubmitButton = (formButton, settings) => {
-  formButton.classList.remove(settings.inactiveButtonClass);
-  formButton.disabled = false;
-};
+// const enableSubmitButton = (formButton, settings) => {
+//   formButton.classList.remove(settings.inactiveButtonClass);
+//   formButton.disabled = false;
+// };
 
 /* -------------------------------------------------------------------------- */
 /*            /// ----- closing modal by clicking off of it feture            */
