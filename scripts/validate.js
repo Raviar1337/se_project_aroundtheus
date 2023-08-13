@@ -1,71 +1,71 @@
-const disableSubmitButton = (formButton, options) => {
-  formButton.classList.add(options.inactiveButtonClass);
+const disableSubmitButton = (formButton, settings) => {
+  formButton.classList.add(settings.inactiveButtonClass);
   formButton.disabled = true;
 };
 
-const enableSubmitButton = (formButton, options) => {
-  formButton.classList.remove(options.inactiveButtonClass);
+const enableSubmitButton = (formButton, settings) => {
+  formButton.classList.remove(settings.inactiveButtonClass);
   formButton.disabled = false;
 };
 
-const showInputError = (options, input, errorMessage) => {
+const showInputError = (settings, input, errorMessage) => {
   const formError = document.querySelector(`#${input.id}-error`);
-  input.classList.add(options.inputErrorClass);
+  input.classList.add(settings.inputErrorClass);
   formError.textContent = errorMessage;
-  formError.classList.add(options.errorClass);
+  formError.classList.add(settings.errorClass);
 };
 
-const hideInputError = (options, input) => {
+const hideInputError = (settings, input) => {
   const formError = document.querySelector(`#${input.id}-error`);
-  input.classList.remove(options.inputErrorClass);
+  input.classList.remove(settings.inputErrorClass);
   formError.textContent = "";
-  formError.classList.remove(options.errorClass);
+  formError.classList.remove(settings.errorClass);
 };
 
-const checkInputValidity = (inputElement, options) => {
-  if (!inputElement.validity.valid) {
-    showInputError(options, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(options, inputElement);
-  }
+const checkInputValidity = (inputElement, settings) => {
+  // if (!inputElement.validity.valid) {
+  //   showInputError(settings, inputElement, inputElement.validationMessage);
+  // } else {
+  //   hideInputError(settings, inputElement);
+  // }
 };
 
 const checkFormValidity = (formInput) =>
   formInput.every((input) => input.validity.valid);
 
-const formButtonToggle = (formButton, formInput, options) => {
+const formButtonToggle = (formButton, formInput, settings) => {
   const isFormValid = checkFormValidity(formInput);
 
   if (!isFormValid) {
-    disableSubmitButton(formButton, options);
+    disableSubmitButton(formButton, settings);
   } else {
-    enableSubmitButton(formButton, options);
+    enableSubmitButton(formButton, settings);
   }
 };
 
-function setEventListeners(formElement, options) {
-  const formInput = Array.from(
-    formElement.querySelectorAll(options.inputSelector)
-  );
-  const formButton = formElement.querySelector(options.submitButtonSelector);
-  formInput.forEach((input) => {
-    input.addEventListener("keyup", function (evt) {
-      checkInputValidity(evt.target, options);
-      formButtonToggle(formButton, formInput, options);
-    });
-  });
-}
+// function setEventListeners(formElement, settings) {
+//   const formInput = Array.from(
+//     formElement.querySelectorAll(settings.inputSelector)
+//   );
+//   const formButton = formElement.querySelector(settings.submitButtonSelector);
+//   formInput.forEach((input) => {
+//     input.addEventListener("keyup", function (evt) {
+checkInputValidity(evt.target, settings);
+formButtonToggle(formButton, formInput, settings);
+//     });
+//   });
+// }
 
-function enableValidation(options) {
+function enableValidation(settings) {
   const formElements = Array.from(
-    document.querySelectorAll(options.formSelector)
+    document.querySelectorAll(settings.formSelector)
   );
 
   formElements.forEach((formElement) => {
     formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
-    setEventListeners(formElement, options);
+    setEventListeners(formElement, settings);
   });
 }
 

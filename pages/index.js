@@ -25,7 +25,9 @@ const initialCards = [
   },
 ];
 
-//------ IMPORTED CODE ------------------------
+/* -------------------------------------------------------------------------- */
+/*                           //------ IMPORTED CODE                           */
+/* -------------------------------------------------------------------------- */
 
 import {
   openModal,
@@ -36,13 +38,19 @@ import {
 
 import Card from "../components/Card.js";
 
-/// ----- closing modal by clicking off of it feture --------------------------
+import FormValidator from "../components/FormValidator.js";
+
+/* -------------------------------------------------------------------------- */
+/*            /// ----- closing modal by clicking off of it feture            */
+/* -------------------------------------------------------------------------- */
 
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 enableClosingModalFeture(modalBackgrounds);
 
-//----------------- DOM DECLARATIONS For profile edit modal ------------------------------------------------
+/* -------------------------------------------------------------------------- */
+/*         //----------------- DOM DECLARATIONS For profile edit modal        */
+/* -------------------------------------------------------------------------- */
 
 const profileEditModal = document.querySelector(".modal_profile-edit");
 
@@ -70,13 +78,17 @@ const modalProfileSaveButton = profileEditModal.querySelector(
 
 const modalProfileForm = profileEditModal.querySelector(".modal__form");
 
-//---- Card list DOM declarations ---
+/* -------------------------------------------------------------------------- */
+/*                    //---- Card list DOM declarations ---                   */
+/* -------------------------------------------------------------------------- */
 
 const cardsList = document.querySelector(".cards__list");
 
 //_________________________________________________________________________________________
 
-//-----DOM Declarations for adding cards -------------------------------------------------------------
+/* -------------------------------------------------------------------------- */
+/*                  //-----DOM Declarations for adding cards                  */
+/* -------------------------------------------------------------------------- */
 
 const cardModalAddButton = document.querySelector(".add-button");
 
@@ -98,7 +110,9 @@ const inputImageLink = cardAddModal.querySelector(
   ".modal__input_type_description"
 );
 
-//--------Dom declarations for opening a modal -----------
+/* -------------------------------------------------------------------------- */
+/*         //--------Dom declarations for opening a modal -----------         */
+/* -------------------------------------------------------------------------- */
 
 const cardOpenModal = document.querySelector(".modal_card-open");
 
@@ -106,7 +120,9 @@ const cardOpenModalCloseButton = cardOpenModal.querySelector(
   ".modal__close-button"
 );
 
-//----------------------FUNCTIONS --------------------------------------------------------
+/* -------------------------------------------------------------------------- */
+/*                                  FUNCTIONS                                 */
+/* -------------------------------------------------------------------------- */
 
 //-- edit -profile functions----------
 
@@ -127,7 +143,9 @@ function saveEditProfileChanges(evt) {
   profileDescription.textContent = inputProfileDescription.value;
 }
 
-//---add card functions-------------
+/* -------------------------------------------------------------------------- */
+/*                    //---add card functions-------------                    */
+/* -------------------------------------------------------------------------- */
 
 function openCardAddModal() {
   openModal(cardAddModal);
@@ -160,7 +178,9 @@ function saveAddCardChanges(evt) {
 //-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
 //-- Senior student eexplained, running prepend and passing newcard instead of data
 
-//-- cardOpenModal Functions -----
+/* -------------------------------------------------------------------------- */
+/*                     //-- cardOpenModal Functions -----                     */
+/* -------------------------------------------------------------------------- */
 
 function openCardOpenModal() {
   openModal(cardOpenModal);
@@ -172,9 +192,10 @@ function closeCardOpenModal() {
 
 //________________________________________________________________________________________________
 
-//------------------------ EVENTS ---------------------------------------------------------------
-
-//---profile edit modal events
+/* -------------------------------------------------------------------------- */
+/*                      //------------------------ EVENTS                     */
+/* -------------------------------------------------------------------------- */
+/* --------------------- //---profile edit modal events --------------------- */
 
 profileModalEditButton.addEventListener("click", openEditProfileModal);
 
@@ -182,7 +203,7 @@ profileModalCloseButton.addEventListener("click", closeEditProfileModal);
 
 modalProfileForm.addEventListener("submit", saveEditProfileChanges);
 
-//---card add modal events---------
+/* ------------------- //---card add modal events--------- ------------------ */
 
 cardModalAddButton.addEventListener("click", openCardAddModal);
 
@@ -190,13 +211,11 @@ cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
 
 cardAddModalForm.addEventListener("submit", saveAddCardChanges);
 
-//---card Open modal events -------
+/* ------------------- //---card Open modal events ------- ------------------ */
 
 cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 
 //________________________________________________________________________________________________
-
-//---- Nonsense that took to long to figure out because I wrote colneNode instead of cloneNode :( -----
 
 initialCards.forEach((data) => {
   const card = new Card(data, "#cardElementTemplate");
