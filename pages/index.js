@@ -32,7 +32,7 @@ const initialCards = [
 import {
   openModal,
   closeModal,
-  enableClosingModalFeture,
+  enableClosingModalFeature,
   closeModalByEscape,
 } from "../utils/utils.js";
 
@@ -51,10 +51,10 @@ const config = {
 
 const formElements = Array.from(document.querySelectorAll(".modal__form"));
 
-const disableSubmitButton = (formButton, settings) => {
-  formButton.classList.add(settings.inactiveButtonClass);
-  formButton.disabled = true;
-};
+// const disableSubmitButton = (formButton, settings) => {
+//   formButton.classList.add(settings.inactiveButtonClass);
+//   formButton.disabled = true;
+// };
 
 // const enableSubmitButton = (formButton, settings) => {
 //   formButton.classList.remove(settings.inactiveButtonClass);
@@ -67,7 +67,7 @@ const disableSubmitButton = (formButton, settings) => {
 
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
-enableClosingModalFeture(modalBackgrounds);
+enableClosingModalFeature(modalBackgrounds);
 
 /* -------------------------------------------------------------------------- */
 /*         //----------------- DOM DECLARATIONS For profile edit modal        */
@@ -168,9 +168,13 @@ function saveEditProfileChanges(evt) {
 /*                    //---add card functions-------------                    */
 /* -------------------------------------------------------------------------- */
 
+function createCard(newCard) {
+  const card = new Card(newCard, "#cardElementTemplate");
+  return card;
+}
+
 function openCardAddModal() {
   openModal(cardAddModal);
-  disableSubmitButton(cardAddModalSaveButton, config);
 }
 
 function closeCardAddModal() {
@@ -189,7 +193,7 @@ function saveAddCardChanges(evt) {
     name: name,
     link: link,
   };
-  const card = new Card(newCard, "#cardElementTemplate");
+  const card = createCard(newCard);
   cardsList.prepend(card.getCardElement());
 }
 
@@ -239,11 +243,12 @@ cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 //________________________________________________________________________________________________
 
 initialCards.forEach((data) => {
-  const card = new Card(data, "#cardElementTemplate");
+  const card = createCard(data);
   cardsList.prepend(card.getCardElement());
 });
 
 formElements.forEach((formElement) => {
   const formValidator = new FormValidator(config, formElement);
   formValidator.enableValidation();
+  console.log("validator counter");
 });

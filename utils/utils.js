@@ -10,7 +10,7 @@ function closeModal(popup) {
   document.removeEventListener("keydown", closeModalByEscape);
 }
 
-const enableClosingModalFeture = (modalBackgrounds) => {
+const enableClosingModalFeature = (modalBackgrounds) => {
   modalBackgrounds.forEach((background) => {
     background.addEventListener("mousedown", (evt) => {
       if (evt.target === background) {
@@ -27,4 +27,4 @@ function closeModalByEscape(evt) {
   }
 }
 
-export { openModal, closeModal, enableClosingModalFeture, closeModalByEscape };
+export { openModal, closeModal, enableClosingModalFeature, closeModalByEscape };

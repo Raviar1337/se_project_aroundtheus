@@ -63,6 +63,7 @@ export class FormValidator {
   _setFormEventListeners() {
     this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
+      this.disableSubmitButton();
     });
 
     const formInput = Array.from(
@@ -72,7 +73,7 @@ export class FormValidator {
       this._settings.submitButtonSelector
     );
     formInput.forEach((input) => {
-      input.addEventListener("keyup", (evt) => {
+      input.addEventListener("input", (evt) => {
         this._checkFieldValidity(evt.target);
         this._toggleSubmitButtonActive(this._formButton, formInput);
       });
@@ -81,6 +82,7 @@ export class FormValidator {
 
   enableValidation() {
     this._setFormEventListeners();
+    this.disableSubmitButton();
   }
 }
 
