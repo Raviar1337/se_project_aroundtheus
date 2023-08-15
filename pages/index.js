@@ -170,7 +170,7 @@ function saveEditProfileChanges(evt) {
 
 function createCard(newCard) {
   const card = new Card(newCard, "#cardElementTemplate");
-  return card;
+  return card.getCardElement();
 }
 
 function openCardAddModal() {
@@ -193,8 +193,8 @@ function saveAddCardChanges(evt) {
     name: name,
     link: link,
   };
-  const card = createCard(newCard);
-  cardsList.prepend(card.getCardElement());
+
+  cardsList.prepend(createCard(newCard));
 }
 
 //-- I made the above function work by changing the initial cards array to let from const.
@@ -243,8 +243,7 @@ cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 //________________________________________________________________________________________________
 
 initialCards.forEach((data) => {
-  const card = createCard(data);
-  cardsList.prepend(card.getCardElement());
+  cardsList.prepend(createCard(data));
 });
 
 formElements.forEach((formElement) => {

@@ -66,16 +66,16 @@ export class FormValidator {
       this.disableSubmitButton();
     });
 
-    const formInput = Array.from(
+    const formInputs = Array.from(
       this._formElement.querySelectorAll(this._settings.inputSelector)
     );
     this._formButton = this._formElement.querySelector(
       this._settings.submitButtonSelector
     );
-    formInput.forEach((input) => {
+    formInputs.forEach((input) => {
       input.addEventListener("input", (evt) => {
         this._checkFieldValidity(evt.target);
-        this._toggleSubmitButtonActive(this._formButton, formInput);
+        this._toggleSubmitButtonActive(this._formButton, formInputs);
       });
     });
   }

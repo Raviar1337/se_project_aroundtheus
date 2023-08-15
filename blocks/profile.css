@@ -1,5 +1,6 @@
 .profile {
   max-width: 880px;
+  min-width: 880px;
   width: 100%;
   display: flex;
   padding: 36px 0 47px;
@@ -48,6 +49,9 @@
 }
 
 @media screen and (max-width: 980px) {
+  .profile {
+    min-width: 581px;
+  }
   .profile__title {
     font-size: 22px;
     line-height: 27px;
@@ -66,6 +70,7 @@
     flex-direction: column;
     align-items: center;
     padding-bottom: 36px;
+    min-width: none;
   }
 
   .profile__picture {
