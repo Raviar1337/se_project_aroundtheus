@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Around the USA</title>
-    <link rel="stylesheet" href="./pages/index.css" />
   </head>
   <body>
     <div class="page">
@@ -13,7 +12,7 @@
         <header class="header">
           <img
             class="header__image"
-            src="./images/Header-title.svg"
+            src="<%=require('./images/Header-title.svg')%>"
             alt="header title"
           />
         </header>
@@ -21,14 +20,14 @@
           <section class="profile">
             <img
               class="profile__picture"
-              src="./images/jacques-cousteau.png"
+              src="<%=require('./images/jacques-cousteau.png')%>"
               alt="profile"
             />
             <div class="profile__header">
               <h1 class="profile__title">Jacques Cousteau</h1>
               <button type="button" class="edit-button">
                 <img
-                  src="./images/edit-pencile.svg"
+                  src="<%=require('./images/edit-pencile.svg')%>"
                   alt="edit button"
                   class="edit-button__image"
                 />
@@ -38,7 +37,7 @@
 
             <button type="button" class="add-button">
               <img
-                src="./images/plussign.svg"
+                src="<%=require('./images/plussign.svg')%>"
                 alt="add button"
                 class="add-button__image"
               />
@@ -147,7 +146,7 @@
       <li class="card">
         <button class="card__delete-button">
           <img
-            src="./images/DeleteButton.svg"
+            src="<%=require('./images/DeleteButton.svg')%>"
             alt="delete"
             class="card__button-image"
           />
@@ -157,7 +156,7 @@
           <h2 class="card__title"></h2>
           <button type="button" class="card__like-button" data-liked="false">
             <img
-              src="./images/Cardlikebutton.svg"
+              src="<%=require('./images/Cardlikebutton.svg')%>"
               alt="like button"
               class="card__button-image"
             />
@@ -166,6 +165,5 @@
       </li>
     </template>
     <!-- Just a code marker dont mind me !!!  :D -->
-    <script type="module" src="./pages/index.js" defer></script>
   </body>
 </html>

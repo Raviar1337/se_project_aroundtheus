@@ -34,11 +34,13 @@ import {
   closeModal,
   enableClosingModalFeature,
   closeModalByEscape,
-} from "../utils/utils.js";
+} from "./utils/utils.js";
 
-import Card from "../components/Card.js";
+import Card from "./components/Card.js";
 
-import { FormValidator } from "../components/FormValidator.js";
+import { FormValidator } from "./components/FormValidator.js";
+
+import "./pages/index.css";
 
 const config = {
   formSelector: ".modal__form",
