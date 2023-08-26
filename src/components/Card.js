@@ -1,5 +1,10 @@
 //---Code for the card class goes here--
-import { openModal } from "../utils/utils.js";
+import {
+  openModal,
+  cardOpenModal,
+  cardOpenModalImage,
+  cardOpenModalText,
+} from "../utils/utils.js";
 
 export default class Card {
   constructor(data, templateSelector) {
@@ -11,11 +16,6 @@ export default class Card {
   //---- private method for each event handler goes here
 
   _cardOpenModalEventHandler() {
-    const cardOpenModal = document.querySelector(".modal_card-open");
-    const cardOpenModalImage = document.querySelector(".modal__opened-image");
-    const cardOpenModalText = document.querySelector(
-      ".modal__heading_type_open-image"
-    );
     cardOpenModalText.textContent = this._name;
     cardOpenModalImage.src = this._link;
     cardOpenModalImage.alt = `Photo of ${this._name}`;
@@ -26,12 +26,12 @@ export default class Card {
     const isLiked = this._cardLikeButton.dataset.liked === "true";
     if (isLiked) {
       this._cardLikeButton.dataset.liked = "false";
-      this._cardLikeButtonImage.src = "./images/Cardlikebutton.svg";
+      this._cardLikeButtonImage.src = "../images/Cardlikebutton.svg";
       return;
     }
 
     this._cardLikeButton.dataset.liked = "true";
-    this._cardLikeButtonImage.src = "./images/LikeButtonActive.svg";
+    this._cardLikeButtonImage.src = "../images/LikeButtonActive.svg";
   }
 
   _cardDeleteButtonEventHandler() {

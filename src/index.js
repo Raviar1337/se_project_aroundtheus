@@ -33,7 +33,26 @@ import {
   openModal,
   closeModal,
   enableClosingModalFeature,
-  closeModalByEscape,
+  // closeModalByEscape,
+  profileEditModal,
+  cardOpenModal,
+  cardOpenModalCloseButton,
+  cardsList,
+  profileModalCloseButton,
+  profileModalEditButton,
+  profileName,
+  profileDescription,
+  inputProfileName,
+  inputProfileDescription,
+  // modalProfileSaveButton,
+  modalProfileForm,
+  cardAddModal,
+  cardModalAddButton,
+  cardAddModalCloseButton,
+  // cardAddModalSaveButton,
+  cardAddModalForm,
+  inputCardName,
+  inputImageLink,
 } from "./utils/utils.js";
 
 import Card from "./components/Card.js";
@@ -53,16 +72,6 @@ const config = {
 
 const formElements = Array.from(document.querySelectorAll(".modal__form"));
 
-// const disableSubmitButton = (formButton, settings) => {
-//   formButton.classList.add(settings.inactiveButtonClass);
-//   formButton.disabled = true;
-// };
-
-// const enableSubmitButton = (formButton, settings) => {
-//   formButton.classList.remove(settings.inactiveButtonClass);
-//   formButton.disabled = false;
-// };
-
 /* -------------------------------------------------------------------------- */
 /*            /// ----- closing modal by clicking off of it feture            */
 /* -------------------------------------------------------------------------- */
@@ -70,78 +79,6 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 enableClosingModalFeature(modalBackgrounds);
-
-/* -------------------------------------------------------------------------- */
-/*         //----------------- DOM DECLARATIONS For profile edit modal        */
-/* -------------------------------------------------------------------------- */
-
-const profileEditModal = document.querySelector(".modal_profile-edit");
-
-const profileModalCloseButton = profileEditModal.querySelector(
-  ".modal__close-button"
-);
-
-const profileModalEditButton = document.querySelector(".edit-button");
-
-const profileName = document.querySelector(".profile__title");
-
-const profileDescription = document.querySelector(".profile__description");
-
-const inputProfileName = profileEditModal.querySelector(
-  ".modal__input_type_name"
-);
-
-const inputProfileDescription = profileEditModal.querySelector(
-  ".modal__input_type_description"
-);
-
-const modalProfileSaveButton = profileEditModal.querySelector(
-  ".modal__save-button"
-);
-
-const modalProfileForm = profileEditModal.querySelector(".modal__form");
-
-/* -------------------------------------------------------------------------- */
-/*                    //---- Card list DOM declarations ---                   */
-/* -------------------------------------------------------------------------- */
-
-const cardsList = document.querySelector(".cards__list");
-
-//_________________________________________________________________________________________
-
-/* -------------------------------------------------------------------------- */
-/*                  //-----DOM Declarations for adding cards                  */
-/* -------------------------------------------------------------------------- */
-
-const cardModalAddButton = document.querySelector(".add-button");
-
-const cardAddModal = document.querySelector(".modal_card-add");
-
-const cardAddModalCloseButton = cardAddModal.querySelector(
-  ".modal__close-button"
-);
-
-const cardAddModalSaveButton = cardAddModal.querySelector(
-  ".modal__save-button"
-); //This was removed because instead of a save button, the submit evennty listener on the form is better ,later  re added for validation reasons
-
-const cardAddModalForm = cardAddModal.querySelector(".modal__form");
-
-const inputCardName = cardAddModal.querySelector(".modal__input_type_name");
-
-const inputImageLink = cardAddModal.querySelector(
-  ".modal__input_type_description"
-);
-
-/* -------------------------------------------------------------------------- */
-/*         //--------Dom declarations for opening a modal -----------         */
-/* -------------------------------------------------------------------------- */
-
-const cardOpenModal = document.querySelector(".modal_card-open");
-
-const cardOpenModalCloseButton = cardOpenModal.querySelector(
-  ".modal__close-button"
-);
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
@@ -208,10 +145,6 @@ function saveAddCardChanges(evt) {
 /* -------------------------------------------------------------------------- */
 /*                     //-- cardOpenModal Functions -----                     */
 /* -------------------------------------------------------------------------- */
-
-function openCardOpenModal() {
-  openModal(cardOpenModal);
-}
 
 function closeCardOpenModal() {
   closeModal(cardOpenModal);
