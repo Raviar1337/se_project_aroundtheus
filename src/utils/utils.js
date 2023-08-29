@@ -31,6 +31,10 @@ function closeModalByEscape(evt) {
 /*                              ALL the CONSTANTS                             */
 /* -------------------------------------------------------------------------- */
 
+/* --------------- DOM declaratiion for all modal backgrounds --------------- */
+
+export const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
+
 /* ----------------- DOM DECLARATIONS For profile edit modal ---------------- */
 
 export const profileEditModal = document.querySelector(".modal_profile-edit");

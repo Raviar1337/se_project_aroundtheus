@@ -34,18 +34,18 @@ import {
   closeModal,
   enableClosingModalFeature,
   // closeModalByEscape,
-  profileEditModal,
+  // profileEditModal,
   cardOpenModal,
   cardOpenModalCloseButton,
   cardsList,
-  profileModalCloseButton,
+  // profileModalCloseButton,
   profileModalEditButton,
   profileName,
   profileDescription,
   inputProfileName,
   inputProfileDescription,
   // modalProfileSaveButton,
-  modalProfileForm,
+  // modalProfileForm,
   cardAddModal,
   cardModalAddButton,
   cardAddModalCloseButton,
@@ -53,6 +53,7 @@ import {
   cardAddModalForm,
   inputCardName,
   inputImageLink,
+  modalBackgrounds,
 } from "./utils/utils.js";
 
 import Card from "./components/Card.js";
@@ -60,6 +61,28 @@ import Card from "./components/Card.js";
 import { FormValidator } from "./components/FormValidator.js";
 
 import "./pages/index.css";
+import PopupWithForm from "./components/PopupWithForm.js";
+import Popup from "./components/Popup.js";
+import UserInfo from "./components/UserInfo.js";
+
+/* -------------------------------------------------------------------------- */
+/*                                  test area                                 */
+/* -------------------------------------------------------------------------- */
+
+const profileData = {
+  name: profileName.textContent,
+  job: profileDescription.textContent,
+};
+
+const currentUserInfo = new UserInfo(profileData);
+
+console.log(profileData);
+
+console.log(currentUserInfo.getUserInfo());
+
+/* -------------------------------------------------------------------------- */
+/*                              end of test area                              */
+/* -------------------------------------------------------------------------- */
 
 const config = {
   formSelector: ".modal__form",
@@ -76,32 +99,30 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 /*            /// ----- closing modal by clicking off of it feture            */
 /* -------------------------------------------------------------------------- */
 
-const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
-
 enableClosingModalFeature(modalBackgrounds);
 
 /* -------------------------------------------------------------------------- */
 /*                                  FUNCTIONS                                 */
 /* -------------------------------------------------------------------------- */
 
-//-- edit -profile functions----------
+/* -------------------------------------------------------------------------- */
+/*                          PROFILE EDIT MODAL STUFF                          */
+/* -------------------------------------------------------------------------- */
 
-function openEditProfileModal() {
-  openModal(profileEditModal);
-  inputProfileName.value = profileName.textContent;
-  inputProfileDescription.value = profileDescription.textContent;
-}
-
-function closeEditProfileModal() {
-  closeModal(profileEditModal);
-}
-
-function saveEditProfileChanges(evt) {
-  evt.preventDefault();
-  closeModal(profileEditModal);
+const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
   profileName.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
+  profileEditModalPopup.close();
+});
+
+function openEditProfileModal() {
+  console.log("clicking now ?");
+  profileEditModalPopup.open();
 }
+
+profileModalEditButton.addEventListener("click", openEditProfileModal);
+
+// modalProfileForm.addEventListener("submit", saveEditProfileChanges);   ---might need this so leaving here
 
 /* -------------------------------------------------------------------------- */
 /*                    //---add card functions-------------                    */
@@ -155,13 +176,6 @@ function closeCardOpenModal() {
 /* -------------------------------------------------------------------------- */
 /*                      //------------------------ EVENTS                     */
 /* -------------------------------------------------------------------------- */
-/* --------------------- //---profile edit modal events --------------------- */
-
-profileModalEditButton.addEventListener("click", openEditProfileModal);
-
-profileModalCloseButton.addEventListener("click", closeEditProfileModal);
-
-modalProfileForm.addEventListener("submit", saveEditProfileChanges);
 
 /* ------------------- //---card add modal events--------- ------------------ */
 
