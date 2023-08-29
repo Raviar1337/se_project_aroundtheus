@@ -30,7 +30,7 @@ const initialCards = [
 /* -------------------------------------------------------------------------- */
 
 import {
-  openModal,
+  // openModal,
   closeModal,
   enableClosingModalFeature,
   // closeModalByEscape,
@@ -46,11 +46,11 @@ import {
   inputProfileDescription,
   // modalProfileSaveButton,
   // modalProfileForm,
-  cardAddModal,
+  // cardAddModal,
   cardModalAddButton,
-  cardAddModalCloseButton,
+  // cardAddModalCloseButton,
   // cardAddModalSaveButton,
-  cardAddModalForm,
+  // cardAddModalForm,
   inputCardName,
   inputImageLink,
   modalBackgrounds,
@@ -128,23 +128,7 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 /*                    //---add card functions-------------                    */
 /* -------------------------------------------------------------------------- */
 
-function createCard(newCard) {
-  const card = new Card(newCard, "#cardElementTemplate");
-  return card.getCardElement();
-}
-
-function openCardAddModal() {
-  openModal(cardAddModal);
-}
-
-function closeCardAddModal() {
-  closeModal(cardAddModal);
-}
-
-function saveAddCardChanges(evt) {
-  evt.preventDefault();
-  closeModal(cardAddModal);
-
+const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
   const name = inputCardName.value;
   const link = inputImageLink.value;
   inputCardName.value = "";
@@ -155,7 +139,24 @@ function saveAddCardChanges(evt) {
   };
 
   cardsList.prepend(createCard(newCard));
+});
+
+function createCard(newCard) {
+  const card = new Card(newCard, "#cardElementTemplate");
+  return card.getCardElement();
 }
+
+function openCardAddModal() {
+  addCardModalPopup.open();
+}
+
+/* ------------------- //---card add modal events--------- ------------------ */
+
+cardModalAddButton.addEventListener("click", openCardAddModal);
+
+// cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
+
+// cardAddModalForm.addEventListener("submit", saveAddCardChanges);
 
 //-- I made the above function work by changing the initial cards array to let from const.
 //-- Alternitively i could leave it const and use the for each method to clear the array
@@ -176,14 +177,6 @@ function closeCardOpenModal() {
 /* -------------------------------------------------------------------------- */
 /*                      //------------------------ EVENTS                     */
 /* -------------------------------------------------------------------------- */
-
-/* ------------------- //---card add modal events--------- ------------------ */
-
-cardModalAddButton.addEventListener("click", openCardAddModal);
-
-cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
-
-cardAddModalForm.addEventListener("submit", saveAddCardChanges);
 
 /* ------------------- //---card Open modal events ------- ------------------ */
 
