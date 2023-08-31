@@ -7,7 +7,6 @@ export class FormValidator {
   }
 
   _showInputError(settings, input, errorMessage) {
-    console.log("error message code should be here");
     const formError = this._formElement.querySelector(`#${input.id}-error`);
     input.classList.add(settings.inputErrorClass);
     formError.textContent = errorMessage;
@@ -15,7 +14,6 @@ export class FormValidator {
   }
 
   _hideInputError(settings, input) {
-    console.log("hide input error code should be here");
     const formError = this._formElement.querySelector(`#${input.id}-error`);
     input.classList.remove(settings.inputErrorClass);
     formError.textContent = "";
@@ -23,13 +21,11 @@ export class FormValidator {
   }
 
   disableSubmitButton() {
-    console.log("disable submit button");
     this._formButton.classList.add(this._settings.inactiveButtonClass);
     this._formButton.disabled = true;
   }
 
   _enableSubmitButton() {
-    console.log("enable submit button");
     this._formButton.classList.remove(this._settings.inactiveButtonClass);
     this._formButton.disabled = false;
   }

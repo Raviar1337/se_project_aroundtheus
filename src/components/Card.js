@@ -1,26 +1,20 @@
 //---Code for the card class goes here--
-import {
-  openModal,
-  cardOpenModal,
-  cardOpenModalImage,
-  cardOpenModalText,
-} from "../utils/utils.js";
+// import {
+//   openModal,
+//   cardOpenModal,
+//   cardOpenModalImage,
+//   cardOpenModalText,
+// } from "../utils/utils.js";
 
 export default class Card {
-  constructor(data, templateSelector) {
+  constructor(data, templateSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   //---- private method for each event handler goes here
-
-  _cardOpenModalEventHandler() {
-    cardOpenModalText.textContent = this._name;
-    cardOpenModalImage.src = this._link;
-    cardOpenModalImage.alt = `Photo of ${this._name}`;
-    openModal(cardOpenModal);
-  }
 
   _cardLikeButtonToggleEventHandler() {
     const isLiked = this._cardLikeButton.dataset.liked === "true";
@@ -43,7 +37,7 @@ export default class Card {
 
   _setCardClassEventListeners() {
     this._cardImageElement.addEventListener("click", () => {
-      this._cardOpenModalEventHandler();
+      this._handleImageClick();
     });
 
     this._cardLikeButton.addEventListener("click", () => {

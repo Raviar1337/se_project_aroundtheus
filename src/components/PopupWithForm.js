@@ -1,4 +1,4 @@
-import Popup from "./Popup";
+import Popup from "./Popup.js";
 
 export default class PopupWithForm extends Popup {
   constructor(popupSelector, handleFormSubmit) {
@@ -11,19 +11,34 @@ export default class PopupWithForm extends Popup {
     super.open();
 
     this._setEventListeners();
-    console.log("open Method was called");
   }
 
-  close() {
-    super.close();
+  close = () => {
     this._removeEventListeners();
-  }
+    const formSelector = this._popupElement.querySelector(".modal__form");
+
+    formSelector.reset();
+    super.close();
+  };
 
   submit = () => {
-    console.log("form submit is firiing");
     this._handleFormSubmit();
+
     this.close();
   };
+
+  _getInputValues() {
+    const formSelector = this._popupElement.querySelector(".modal__form");
+    const formInputFields = Array.from(
+      formSelector.querySelectorAll(".modal__input")
+    );
+    const data = {};
+    formInputFields.forEach((input) => {
+      data[input.name] = input.value;
+    });
+    console.log(data);
+    return data;
+  }
 
   _setEventListeners() {
     super._setEventListeners();
@@ -37,7 +52,8 @@ export default class PopupWithForm extends Popup {
     const submitButtonSelector = this._popupElement.querySelector(
       ".modal__save-button"
     );
-    super._removeEventListeners();
+
     submitButtonSelector.removeEventListener("click", this.submit);
+    super._removeEventListeners();
   }
 }

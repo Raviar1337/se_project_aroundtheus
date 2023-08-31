@@ -36,7 +36,7 @@ import {
   // closeModalByEscape,
   // profileEditModal,
   cardOpenModal,
-  cardOpenModalCloseButton,
+  // cardOpenModalCloseButton,
   cardsList,
   // profileModalCloseButton,
   profileModalEditButton,
@@ -64,6 +64,7 @@ import "./pages/index.css";
 import PopupWithForm from "./components/PopupWithForm.js";
 import Popup from "./components/Popup.js";
 import UserInfo from "./components/UserInfo.js";
+import PopupWithImage from "./components/PopupWithImage.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
@@ -112,11 +113,11 @@ enableClosingModalFeature(modalBackgrounds);
 const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
   profileName.textContent = inputProfileName.value;
   profileDescription.textContent = inputProfileDescription.value;
+  currentUserInfo.setUserInfo();
   profileEditModalPopup.close();
 });
 
 function openEditProfileModal() {
-  console.log("clicking now ?");
   profileEditModalPopup.open();
 }
 
@@ -141,8 +142,12 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
   cardsList.prepend(createCard(newCard));
 });
 
+const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
+
 function createCard(newCard) {
-  const card = new Card(newCard, "#cardElementTemplate");
+  const card = new Card(newCard, "#cardElementTemplate", () => {
+    cardOpenModalPopup.open(newCard);
+  });
   return card.getCardElement();
 }
 
@@ -158,12 +163,6 @@ cardModalAddButton.addEventListener("click", openCardAddModal);
 
 // cardAddModalForm.addEventListener("submit", saveAddCardChanges);
 
-//-- I made the above function work by changing the initial cards array to let from const.
-//-- Alternitively i could leave it const and use the for each method to clear the array
-//-- Maybe just making a new array and runing the for each on it  ??
-//-- I opted to clear the array because I couldn't figure out how to just choose the last item in the array
-//-- Senior student eexplained, running prepend and passing newcard instead of data
-
 /* -------------------------------------------------------------------------- */
 /*                     //-- cardOpenModal Functions -----                     */
 /* -------------------------------------------------------------------------- */
@@ -172,15 +171,13 @@ function closeCardOpenModal() {
   closeModal(cardOpenModal);
 }
 
-//________________________________________________________________________________________________
-
-/* -------------------------------------------------------------------------- */
-/*                      //------------------------ EVENTS                     */
-/* -------------------------------------------------------------------------- */
-
 /* ------------------- //---card Open modal events ------- ------------------ */
 
-cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
+function handleCardClick() {
+  cardOpenModalPopup.open();
+}
+
+// cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
 
 //________________________________________________________________________________________________
 

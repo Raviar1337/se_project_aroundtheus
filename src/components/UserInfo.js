@@ -12,6 +12,7 @@ export default class UserInfo {
 
   setUserInfo() {
     //used during form submit action
+    console.log("set user info method is firing");
   }
 }
 

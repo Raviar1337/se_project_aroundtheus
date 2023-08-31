@@ -8,22 +8,19 @@ export default class Popup {
   }
 
   open() {
-    console.log("super open Method was called");
     this._popupElement.classList.add("modal_opened");
-    console.log(this._popupElement);
+
     this._setEventListeners();
   }
 
-  close = () => {
-    console.log(this._popupElement);
+  close() {
     this._popupElement.classList.remove("modal_opened");
-    console.log(this._popupElement);
+
     this._removeEventListeners();
-  };
+  }
 
   _handleEscapeClose = (evt) => {
     if (evt.key === "Escape") {
-      console.log("escape event firing");
       this.close();
     }
   };
@@ -33,7 +30,6 @@ export default class Popup {
     this._popupElement
       .querySelector(".modal__close-button")
       .addEventListener("click", this.close);
-    console.log("event listener is set");
   }
 
   _removeEventListeners() {
