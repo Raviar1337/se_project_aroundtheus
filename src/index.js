@@ -71,7 +71,16 @@ import Section from "./components/Section.js";
 /*                                  test area                                 */
 /* -------------------------------------------------------------------------- */
 
-console.log(cardsList);
+const profileData = {
+  name: profileName,
+  job: profileDescription,
+};
+
+const currentUserInfo = new UserInfo(profileData);
+
+console.log(profileData);
+
+console.log(currentUserInfo.getUserInfo());
 
 /* -------------------------------------------------------------------------- */
 /*                              end of test area                              */
@@ -82,9 +91,10 @@ console.log(cardsList);
 /* -------------------------------------------------------------------------- */
 
 const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
-  profileName.textContent = inputProfileName.value;
-  profileDescription.textContent = inputProfileDescription.value;
-  currentUserInfo.setUserInfo();
+  currentUserInfo.setUserInfo(
+    inputProfileName.value,
+    inputProfileDescription.value
+  );
   profileEditModalPopup.close();
 });
 
@@ -105,8 +115,6 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
   };
 
   cardsListSection.addItem(createCard(newCard));
-
-  // cardsList.prepend(createCard(newCard));
 });
 
 function createCard(newCard) {
@@ -133,6 +141,7 @@ cardModalAddButton.addEventListener("click", openCardAddModal);
 
 function openEditProfileModal() {
   profileEditModalPopup.open();
+  profileEditModalPopup;
 }
 
 profileModalEditButton.addEventListener("click", openEditProfileModal);
@@ -170,10 +179,6 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 /* ----------------------------- Initial Scripts ---------------------------- */
 
 enableClosingModalFeature(modalBackgrounds);
-
-// initialCards.forEach((data) => {
-//   cardsListSection.addItem(createCard(data));
-// });
 
 cardsListSection.renderItems();
 

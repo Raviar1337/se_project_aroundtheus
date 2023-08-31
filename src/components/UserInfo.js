@@ -5,13 +5,18 @@ export default class UserInfo {
   }
 
   getUserInfo() {
-    const profileData = { profileName: this._name, profileJob: this._job };
+    const profileData = {
+      profileName: this._name.textContent,
+      profileJob: this._job.textContent,
+    };
     console.log(profileData);
     return profileData;
   }
 
-  setUserInfo() {
+  setUserInfo(nameInput, descriptionInput) {
     //used during form submit action
+    this._name.textContent = nameInput;
+    this._job.textContent = descriptionInput;
     console.log("set user info method is firing");
   }
 }
@@ -19,14 +24,3 @@ export default class UserInfo {
 /* -------------------------------------------------------------------------- */
 /*                      Test area Code that makes it work                     */
 /* -------------------------------------------------------------------------- */
-
-// const profileData = {
-//   name: profileName.textContent,
-//   job: profileDescription.textContent,
-// };
-
-// const currentUserInfo = new UserInfo(profileData);
-
-// console.log(profileData);
-
-// console.log(currentUserInfo.getUserInfo());
