@@ -31,11 +31,11 @@ const initialCards = [
 
 import {
   // openModal,
-  closeModal,
+  // closeModal,
   enableClosingModalFeature,
   // closeModalByEscape,
   // profileEditModal,
-  cardOpenModal,
+  // cardOpenModal,
   // cardOpenModalCloseButton,
   cardsList,
   // profileModalCloseButton,
@@ -62,7 +62,7 @@ import { FormValidator } from "./components/FormValidator.js";
 
 import "./pages/index.css";
 import PopupWithForm from "./components/PopupWithForm.js";
-import Popup from "./components/Popup.js";
+// import Popup from "./components/Popup.js";
 import UserInfo from "./components/UserInfo.js";
 import PopupWithImage from "./components/PopupWithImage.js";
 
@@ -85,29 +85,8 @@ console.log(currentUserInfo.getUserInfo());
 /*                              end of test area                              */
 /* -------------------------------------------------------------------------- */
 
-const config = {
-  formSelector: ".modal__form",
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
-  inactiveButtonClass: "modal__save-button_disabled",
-  inputErrorClass: "modal__input_invalid",
-  errorClass: "modal__error_visible",
-};
-
-const formElements = Array.from(document.querySelectorAll(".modal__form"));
-
 /* -------------------------------------------------------------------------- */
-/*            /// ----- closing modal by clicking off of it feture            */
-/* -------------------------------------------------------------------------- */
-
-enableClosingModalFeature(modalBackgrounds);
-
-/* -------------------------------------------------------------------------- */
-/*                                  FUNCTIONS                                 */
-/* -------------------------------------------------------------------------- */
-
-/* -------------------------------------------------------------------------- */
-/*                          PROFILE EDIT MODAL STUFF                          */
+/*                             Profile Edit Feture                            */
 /* -------------------------------------------------------------------------- */
 
 const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
@@ -117,16 +96,10 @@ const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
   profileEditModalPopup.close();
 });
 
-function openEditProfileModal() {
-  profileEditModalPopup.open();
-}
-
-profileModalEditButton.addEventListener("click", openEditProfileModal);
-
 // modalProfileForm.addEventListener("submit", saveEditProfileChanges);   ---might need this so leaving here
 
 /* -------------------------------------------------------------------------- */
-/*                    //---add card functions-------------                    */
+/*                               Add Card Feture                              */
 /* -------------------------------------------------------------------------- */
 
 const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
@@ -142,8 +115,6 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
   cardsList.prepend(createCard(newCard));
 });
 
-const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
-
 function createCard(newCard) {
   const card = new Card(newCard, "#cardElementTemplate", () => {
     cardOpenModalPopup.open(newCard);
@@ -151,35 +122,47 @@ function createCard(newCard) {
   return card.getCardElement();
 }
 
+/* -------------------------------------------------------------------------- */
+/*                              Open Card Feture                              */
+/* -------------------------------------------------------------------------- */
+const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
+
+/* -------------------------------------------------------------------------- */
+/*                                 Page Interactions                          */
+/* -------------------------------------------------------------------------- */
+
 function openCardAddModal() {
   addCardModalPopup.open();
 }
 
-/* ------------------- //---card add modal events--------- ------------------ */
-
 cardModalAddButton.addEventListener("click", openCardAddModal);
 
-// cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
-
-// cardAddModalForm.addEventListener("submit", saveAddCardChanges);
-
-/* -------------------------------------------------------------------------- */
-/*                     //-- cardOpenModal Functions -----                     */
-/* -------------------------------------------------------------------------- */
-
-function closeCardOpenModal() {
-  closeModal(cardOpenModal);
+function openEditProfileModal() {
+  profileEditModalPopup.open();
 }
 
-/* ------------------- //---card Open modal events ------- ------------------ */
+profileModalEditButton.addEventListener("click", openEditProfileModal);
 
-function handleCardClick() {
-  cardOpenModalPopup.open();
-}
+/* -------------------------------------------------------------------------- */
+/*                            Initializing Web Page                           */
+/* -------------------------------------------------------------------------- */
 
-// cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
+/* ---------------------- form validation configuration --------------------- */
 
-//________________________________________________________________________________________________
+const config = {
+  formSelector: ".modal__form",
+  inputSelector: ".modal__input",
+  submitButtonSelector: ".modal__save-button",
+  inactiveButtonClass: "modal__save-button_disabled",
+  inputErrorClass: "modal__input_invalid",
+  errorClass: "modal__error_visible",
+};
+
+const formElements = Array.from(document.querySelectorAll(".modal__form"));
+
+/* ----------------------------- Initial Scripts ---------------------------- */
+
+enableClosingModalFeature(modalBackgrounds);
 
 initialCards.forEach((data) => {
   cardsList.prepend(createCard(data));
@@ -190,3 +173,25 @@ formElements.forEach((formElement) => {
   formValidator.enableValidation();
   console.log("validator counter");
 });
+
+// cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
+
+// cardAddModalForm.addEventListener("submit", saveAddCardChanges);
+
+/* -------------------------------------------------------------------------- */
+/*                     //-- cardOpenModal Functions -----                     */
+/* -------------------------------------------------------------------------- */
+
+// function closeCardOpenModal() {
+//   closeModal(cardOpenModal);
+// }
+
+/* ------------------- //---card Open modal events ------- ------------------ */
+
+// function handleCardClick() {
+//   cardOpenModalPopup.open();
+// }
+
+// cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
+
+//________________________________________________________________________________________________
