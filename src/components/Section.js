@@ -1,12 +1,19 @@
-export default class section {
+export default class Section {
   constructor({ items, renderer }, selector) {
     this._items = items;
     this._renderer = renderer;
     this._selector = selector;
   }
-  renderItems() {}
+  renderItems() {
+    this._items.forEach((data) => {
+      this._renderer(data);
+    });
+  }
 
-  addItem() {}
+  addItem(listElement) {
+    console.log("add item fired");
+    this._selector.prepend(listElement);
+  }
 }
 
 // It has an object with two properties (items and renderer) as the first parameter of the constructor.

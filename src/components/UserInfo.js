@@ -19,3 +19,14 @@ export default class UserInfo {
 /* -------------------------------------------------------------------------- */
 /*                      Test area Code that makes it work                     */
 /* -------------------------------------------------------------------------- */
+
+// const profileData = {
+//   name: profileName.textContent,
+//   job: profileDescription.textContent,
+// };
+
+// const currentUserInfo = new UserInfo(profileData);
+
+// console.log(profileData);
+
+// console.log(currentUserInfo.getUserInfo());

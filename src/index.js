@@ -1,6 +1,6 @@
 const initialCards = [
   {
-    name: "Yosemite Valley",
+    name: "YValley",
     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
   },
   {
@@ -65,21 +65,13 @@ import PopupWithForm from "./components/PopupWithForm.js";
 // import Popup from "./components/Popup.js";
 import UserInfo from "./components/UserInfo.js";
 import PopupWithImage from "./components/PopupWithImage.js";
+import Section from "./components/Section.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
 /* -------------------------------------------------------------------------- */
 
-const profileData = {
-  name: profileName.textContent,
-  job: profileDescription.textContent,
-};
-
-const currentUserInfo = new UserInfo(profileData);
-
-console.log(profileData);
-
-console.log(currentUserInfo.getUserInfo());
+console.log(cardsList);
 
 /* -------------------------------------------------------------------------- */
 /*                              end of test area                              */
@@ -112,7 +104,9 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
     link: link,
   };
 
-  cardsList.prepend(createCard(newCard));
+  cardsListSection.addItem(createCard(newCard));
+
+  // cardsList.prepend(createCard(newCard));
 });
 
 function createCard(newCard) {
@@ -147,6 +141,19 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 /*                            Initializing Web Page                           */
 /* -------------------------------------------------------------------------- */
 
+/* --------------------------- Web Page Secttions --------------------------- */
+
+const cardsListSection = new Section(
+  {
+    items: initialCards,
+    renderer: (data) => {
+      const card = createCard(data);
+      cardsListSection.addItem(card);
+    },
+  },
+  cardsList
+);
+
 /* ---------------------- form validation configuration --------------------- */
 
 const config = {
@@ -164,34 +171,14 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 
 enableClosingModalFeature(modalBackgrounds);
 
-initialCards.forEach((data) => {
-  cardsList.prepend(createCard(data));
-});
+// initialCards.forEach((data) => {
+//   cardsListSection.addItem(createCard(data));
+// });
+
+cardsListSection.renderItems();
 
 formElements.forEach((formElement) => {
   const formValidator = new FormValidator(config, formElement);
   formValidator.enableValidation();
   console.log("validator counter");
 });
-
-// cardAddModalCloseButton.addEventListener("click", closeCardAddModal);
-
-// cardAddModalForm.addEventListener("submit", saveAddCardChanges);
-
-/* -------------------------------------------------------------------------- */
-/*                     //-- cardOpenModal Functions -----                     */
-/* -------------------------------------------------------------------------- */
-
-// function closeCardOpenModal() {
-//   closeModal(cardOpenModal);
-// }
-
-/* ------------------- //---card Open modal events ------- ------------------ */
-
-// function handleCardClick() {
-//   cardOpenModalPopup.open();
-// }
-
-// cardOpenModalCloseButton.addEventListener("click", closeCardOpenModal);
-
-//________________________________________________________________________________________________
