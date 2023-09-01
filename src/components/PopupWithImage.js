@@ -13,8 +13,4 @@ export default class PopupWithImage extends Popup {
     ).alt = `Photo of ${this._name}`;
     super.open();
   }
-
-  close = () => {
-    super.close();
-  };
 }

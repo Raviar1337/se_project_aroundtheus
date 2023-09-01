@@ -26,17 +26,19 @@ export default class Popup {
     }
   };
 
+  _handleOutsideClick = (evt) => {
+    if (evt.target === this._popupElement) {
+      this.close();
+    }
+  };
+
   _setEventListeners() {
     document.addEventListener("keydown", this._handleEscapeClose);
     this._popupElement
       .querySelector(".modal__close-button")
       .addEventListener("click", this.close);
 
-    this._popupElement.addEventListener("mousedown", (evt) => {
-      if (evt.target === this._popupElement) {
-        this.close();
-      }
-    });
+    this._popupElement.addEventListener("mousedown", this._handleOutsideClick);
   }
 
   _removeEventListeners() {
@@ -44,10 +46,6 @@ export default class Popup {
     this._popupElement
       .querySelector(".modal__close-button")
       .removeEventListener("click", this.close);
-    this._popupElement.addEventListener("mousedown", (evt) => {
-      if (evt.target === this._popupElement) {
-        this.close();
-      }
-    });
+    this._popupElement.addEventListener("mousedown", this._handleOutsideClick);
   }
 }

@@ -132,12 +132,14 @@ const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
 
 function openCardAddModal() {
   addCardModalPopup.open();
+  formValidators["#form__add-card"].disableSubmitButton();
 }
 
 cardModalAddButton.addEventListener("click", openCardAddModal);
 
 function openEditProfileModal() {
   profileEditModalPopup.open();
+  formValidators["#form__edit-profile"].disableSubmitButton();
 
   // call getUserInfo and save to a variable
   // set the value of the input elements
@@ -173,7 +175,11 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-const formElements = Array.from(document.querySelectorAll(".modal__form"));
+// const formElements = Array.from(document.querySelectorAll(".modal__form"));
+
+/* ------- When new forms are added make sure to add to forms selector ------- */
+
+const formSelectors = ["#form__edit-profile", "#form__add-card"];
 
 /* ----------------------------- Initial Scripts ---------------------------- */
 
@@ -181,8 +187,21 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 
 cardsListSection.renderItems();
 
-formElements.forEach((formElement) => {
+const formValidators = {};
+
+// formElements.forEach((formElement) => {
+//   const formValidator = new FormValidator(config, formElement);
+//   formValidator.enableValidation();
+//   formValidator.disableSubmitButton();
+// });
+
+formSelectors.forEach((selector) => {
+  const formElement = document.querySelector(selector);
+  //create form validator
   const formValidator = new FormValidator(config, formElement);
+  // enableValidation
   formValidator.enableValidation();
-  console.log("validator counter");
+  formValidators[selector] = formValidator;
 });
+
+// use in open method
