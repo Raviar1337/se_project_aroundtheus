@@ -32,7 +32,6 @@ const initialCards = [
 import {
   // openModal,
   // closeModal,
-  enableClosingModalFeature,
   // closeModalByEscape,
   // profileEditModal,
   // cardOpenModal,
@@ -42,8 +41,8 @@ import {
   profileModalEditButton,
   profileName,
   profileDescription,
-  inputProfileName,
-  inputProfileDescription,
+  // inputProfileName,------------------------
+  // inputProfileDescription,----------------
   // modalProfileSaveButton,
   // modalProfileForm,
   // cardAddModal,
@@ -51,21 +50,23 @@ import {
   // cardAddModalCloseButton,
   // cardAddModalSaveButton,
   // cardAddModalForm,
-  inputCardName,
-  inputImageLink,
-  modalBackgrounds,
-} from "./utils/utils.js";
+  // inputCardName,
+  // inputImageLink,
+  // modalBackgrounds,
+} from "../utils/constants.js";
 
-import Card from "./components/Card.js";
+// import { enableClosingModalFeature } from "../utils/utils.js";
 
-import { FormValidator } from "./components/FormValidator.js";
+import Card from "../components/Card.js";
 
-import "./pages/index.css";
-import PopupWithForm from "./components/PopupWithForm.js";
+import { FormValidator } from "../components/FormValidator.js";
+
+import "./index.css";
+import PopupWithForm from "../components/PopupWithForm.js";
 // import Popup from "./components/Popup.js";
-import UserInfo from "./components/UserInfo.js";
-import PopupWithImage from "./components/PopupWithImage.js";
-import Section from "./components/Section.js";
+import UserInfo from "../components/UserInfo.js";
+import PopupWithImage from "../components/PopupWithImage.js";
+import Section from "../components/Section.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
@@ -90,13 +91,13 @@ console.log(currentUserInfo.getUserInfo());
 /*                             Profile Edit Feture                            */
 /* -------------------------------------------------------------------------- */
 
-const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
-  currentUserInfo.setUserInfo(
-    inputProfileName.value,
-    inputProfileDescription.value
-  );
-  profileEditModalPopup.close();
-});
+const profileEditModalPopup = new PopupWithForm(
+  "#modal_profile-edit",
+  (data) => {
+    currentUserInfo.setUserInfo(data.title, data.description);
+    profileEditModalPopup.close();
+  }
+);
 
 // modalProfileForm.addEventListener("submit", saveEditProfileChanges);   ---might need this so leaving here
 
@@ -104,14 +105,10 @@ const profileEditModalPopup = new PopupWithForm("#modal_profile-edit", () => {
 /*                               Add Card Feture                              */
 /* -------------------------------------------------------------------------- */
 
-const addCardModalPopup = new PopupWithForm(".modal_card-add", () => {
-  const name = inputCardName.value;
-  const link = inputImageLink.value;
-  inputCardName.value = "";
-  inputImageLink.value = "";
+const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
   const newCard = {
-    name: name,
-    link: link,
+    name: data.title,
+    link: data.url,
   };
 
   cardsListSection.addItem(createCard(newCard));
@@ -141,7 +138,9 @@ cardModalAddButton.addEventListener("click", openCardAddModal);
 
 function openEditProfileModal() {
   profileEditModalPopup.open();
-  profileEditModalPopup;
+
+  // call getUserInfo and save to a variable
+  // set the value of the input elements
 }
 
 profileModalEditButton.addEventListener("click", openEditProfileModal);
@@ -178,7 +177,7 @@ const formElements = Array.from(document.querySelectorAll(".modal__form"));
 
 /* ----------------------------- Initial Scripts ---------------------------- */
 
-enableClosingModalFeature(modalBackgrounds);
+//enableClosingModalFeature(modalBackgrounds);
 
 cardsListSection.renderItems();
 

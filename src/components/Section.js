@@ -2,7 +2,7 @@ export default class Section {
   constructor({ items, renderer }, selector) {
     this._items = items;
     this._renderer = renderer;
-    this._selector = selector;
+    this._container = selector;
   }
   renderItems() {
     this._items.forEach((data) => {
@@ -12,7 +12,7 @@ export default class Section {
 
   addItem(listElement) {
     console.log("add item fired");
-    this._selector.prepend(listElement);
+    this._container.prepend(listElement);
   }
 }
 
