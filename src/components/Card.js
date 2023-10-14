@@ -29,7 +29,6 @@ export default class Card {
   }
 
   _cardDeleteButtonEventHandler() {
-    console.log("clicked the delete button");
     this._cardElement.remove();
   }
 

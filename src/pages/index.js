@@ -30,32 +30,12 @@ const initialCards = [
 /* -------------------------------------------------------------------------- */
 
 import {
-  // openModal,
-  // closeModal,
-  // closeModalByEscape,
-  // profileEditModal,
-  // cardOpenModal,
-  // cardOpenModalCloseButton,
   cardsList,
-  // profileModalCloseButton,
   profileModalEditButton,
   profileName,
   profileDescription,
-  // inputProfileName,------------------------
-  // inputProfileDescription,----------------
-  // modalProfileSaveButton,
-  // modalProfileForm,
-  // cardAddModal,
   cardModalAddButton,
-  // cardAddModalCloseButton,
-  // cardAddModalSaveButton,
-  // cardAddModalForm,
-  // inputCardName,
-  // inputImageLink,
-  // modalBackgrounds,
 } from "../utils/constants.js";
-
-// import { enableClosingModalFeature } from "../utils/utils.js";
 
 import Card from "../components/Card.js";
 
@@ -63,7 +43,7 @@ import { FormValidator } from "../components/FormValidator.js";
 
 import "./index.css";
 import PopupWithForm from "../components/PopupWithForm.js";
-// import Popup from "./components/Popup.js";
+
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
@@ -205,3 +185,48 @@ formSelectors.forEach((selector) => {
 });
 
 // use in open method
+
+fetch("https//:wwww.somewebsite.com")
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Something went wrong: ${res.status}`);
+  })
+  .then((data) => console.log(data))
+  .catch((err) => console.error(err));
+
+/* -------------------------------------------------------------------------- */
+/*                               example request                              */
+/* -------------------------------------------------------------------------- */
+
+fetch("https://around-api.en.tripleten-services.com/v1", {
+  method: "GET",
+  headers: {
+    authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
+  },
+  body: "",
+})
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Something went wrong ${res.status}`);
+  })
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => console.error(err))
+  .finally(console.log("Zug Zug"));
+
+// fetch("https://around-api.en.tripleten-services.com/v1", {
+//   method: "POST",
+//   body: JSON.stringify({
+//     name: "Sam",
+//   }),
+//   headers: {
+//     "Content-Type": "application/json; charset=UTF-8",
+//   },
+// })
+//   .then((response) => response.json())
+//   .then((json) => console.log(`A user named ${json.name} has been added`));

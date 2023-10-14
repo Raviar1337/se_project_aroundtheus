@@ -9,7 +9,7 @@ export default class UserInfo {
       profileName: this._name.textContent,
       profileJob: this._job.textContent,
     };
-    console.log(profileData);
+
     return profileData;
   }
 
@@ -17,7 +17,6 @@ export default class UserInfo {
     //used during form submit action
     this._name.textContent = nameInput;
     this._job.textContent = descriptionInput;
-    console.log("set user info method is firing");
   }
 }
 

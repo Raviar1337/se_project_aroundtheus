@@ -12,7 +12,6 @@ export default class PopupWithForm extends Popup {
   }
 
   close() {
-    // this._removeEventListeners();
     const formSelector = this._popupElement.querySelector(".modal__form");
 
     formSelector.reset();
@@ -35,7 +34,7 @@ export default class PopupWithForm extends Popup {
     formInputFields.forEach((input) => {
       data[input.name] = input.value;
     });
-    console.log(data);
+
     return data;
   }
 

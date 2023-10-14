@@ -11,7 +11,6 @@ export default class Section {
   }
 
   addItem(listElement) {
-    console.log("add item fired");
     this._container.prepend(listElement);
   }
 }
