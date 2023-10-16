@@ -1,29 +1,36 @@
-const initialCards = [
-  {
-    name: "YValley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-];
+const api = new Api({
+  url: "https://around-api.en.tripleten-services.com/v1",
+  authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
+});
+
+const initialCards = api.getCards("/cards");
+
+// const initialCards = [
+//   {
+//     name: "YValley",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+//   },
+//   {
+//     name: "Lake Louise",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+//   },
+//   {
+//     name: "Bald Mountains",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+//   },
+//   {
+//     name: "Latemar",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+//   },
+//   {
+//     name: "Vanoise National Park",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+//   },
+//   {
+//     name: "Lago di Braies",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
+//   },
+// ];
 
 /* -------------------------------------------------------------------------- */
 /*                           //------ IMPORTED CODE                           */
@@ -47,10 +54,15 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
+import Api from "../components/Api.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
 /* -------------------------------------------------------------------------- */
+api.getCurrentUser("/users/me", {
+  name: profileName,
+  about: profileDescription,
+});
 
 const profileData = {
   name: profileName,
@@ -186,38 +198,35 @@ formSelectors.forEach((selector) => {
 
 // use in open method
 
-fetch("https//:wwww.somewebsite.com")
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Something went wrong: ${res.status}`);
-  })
-  .then((data) => console.log(data))
-  .catch((err) => console.error(err));
+/* -------------------------------------------------------------------------- */
+/*                               API CODE BELOW                               */
+/* -------------------------------------------------------------------------- */
 
 /* -------------------------------------------------------------------------- */
 /*                               example request                              */
 /* -------------------------------------------------------------------------- */
 
-fetch("https://around-api.en.tripleten-services.com/v1", {
-  method: "GET",
-  headers: {
-    authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
-  },
-  body: "",
-})
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(`Something went wrong ${res.status}`);
-  })
-  .then((result) => {
-    console.log(result);
-  })
-  .catch((err) => console.error(err))
-  .finally(console.log("Zug Zug"));
+// function basicCall() {
+//   return fetch("https://around-api.en.tripleten-services.com/v1/cards", {
+//     method: "GET",
+//     headers: {
+//       authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
+//     },
+//   })
+//     .then((res) => {
+//       if (res.ok) {
+//         return res.json();
+//       }
+//       return Promise.reject(`Something went wrong ${res.status}`);
+//     })
+//     .then((result) => {
+//       console.log(result);
+//     })
+//     .catch((err) => console.error(err))
+//     .finally(console.log("Zug Zug"));
+// }
+
+// basicCall();
 
 // fetch("https://around-api.en.tripleten-services.com/v1", {
 //   method: "POST",
@@ -230,3 +239,13 @@ fetch("https://around-api.en.tripleten-services.com/v1", {
 // })
 //   .then((response) => response.json())
 //   .then((json) => console.log(`A user named ${json.name} has been added`));
+
+// fetch("https//:wwww.somewebsite.com")
+//   .then((res) => {
+//     if (res.ok) {
+//       return res.json();
+//     }
+//     return Promise.reject(`Something went wrong: ${res.status}`);
+//   })
+//   .then((data) => console.log(data))
+//   .catch((err) => console.error(err));
