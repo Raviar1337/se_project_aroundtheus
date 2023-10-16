@@ -5,7 +5,7 @@ export default class Api {
   }
 
   getCurrentUser(endPoint, DOMLocations) {
-    return fetch(`${this._url}${endPoint}`, {
+    fetch(`${this._url}${endPoint}`, {
       method: "GET",
       headers: {
         authorization: this.authorization,
@@ -32,8 +32,8 @@ export default class Api {
       .finally(console.log("current user request attempted"));
   }
 
-  getCards(endPoint) {
-    return fetch(`${this._url}${endPoint}`, {
+  getCards(endPoint, renderCode) {
+    fetch(`${this._url}${endPoint}`, {
       method: "GET",
       headers: {
         authorization: this.authorization,
@@ -51,4 +51,54 @@ export default class Api {
       .catch((err) => console.error(err))
       .finally(console.log("All Cards request attempted"));
   }
+
+  postCard(endPoint, input) {
+    console.log(input);
+    fetch(`${this._url}${endPoint}`, {
+      method: "POST",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        link: input.link,
+        name: input.name,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("Zug Zug"));
+  }
 }
+
+/* -------------------------------------------------------------------------- */
+/*                              request template                              */
+/* -------------------------------------------------------------------------- */
+
+// function basicCall() {
+//   return fetch(`${this._url}${endPoint}`, {
+//     method: "GET",
+//     headers: {
+//       authorization: this.authorization,
+//     },
+//   })
+//     .then((res) => {
+//       if (res.ok) {
+//         return res.json();
+//       }
+//       return Promise.reject(`Something went wrong ${res.status}`);
+//     })
+//     .then((result) => {
+//       console.log(result);
+//     })
+//     .catch((err) => console.error(err))
+//     .finally(console.log("Zug Zug"));
+// }

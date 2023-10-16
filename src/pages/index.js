@@ -103,7 +103,7 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
     link: data.url,
   };
 
-  cardsListSection.addItem(createCard(newCard));
+  api.postCard("/cards", newCard);
 });
 
 function createCard(newCard) {
@@ -143,7 +143,7 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 /*                            Initializing Web Page                           */
 /* -------------------------------------------------------------------------- */
 
-/* --------------------------- Web Page Secttions --------------------------- */
+/* --------------------------- Web Page Sections --------------------------- */
 
 const cardsListSection = new Section(
   {
@@ -176,8 +176,6 @@ const formSelectors = ["#form__edit-profile", "#form__add-card"];
 /* ----------------------------- Initial Scripts ---------------------------- */
 
 //enableClosingModalFeature(modalBackgrounds);
-
-cardsListSection.renderItems();
 
 const formValidators = {};
 
