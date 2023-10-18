@@ -92,6 +92,29 @@
     </div>
     <!-- end of profile edit modal -->
 
+    <!-- --------------------- edit profile avatar start ---------------------- -->
+    <div class="modal modal_avatar-edit" id="modal_avatar-edit">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="form__avatar-edit" novalidate>
+          <input
+            type="url"
+            id="card-add__input_url"
+            name="url"
+            class="modal__input modal__input_type_description"
+            placeholder="Image link"
+            required
+          />
+          <span id="card-add__input_url-error" class="modal__error"
+            >this is an error message</span
+          >
+          <button type="submit" class="modal__save-button">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- ----------------------- Edit profile avatar end ----------------------- -->
+
     <!-- Adding Card Modal Start -->
     <div class="modal modal_card-add">
       <div class="modal__container">

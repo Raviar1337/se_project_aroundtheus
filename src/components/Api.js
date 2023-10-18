@@ -22,6 +22,7 @@ export default class Api {
         console.log("umm now what??");
         DOMLocations.name.textContent = result.name;
         DOMLocations.about.textContent = result.about;
+        DOMLocations.avatar.src = result.avatar;
         // const profileData = {
         //   name: result.name,
         //   job: result.about,
@@ -54,7 +55,7 @@ export default class Api {
         console.log(result);
       })
       .catch((err) => console.error(err))
-      .finally(console.log("edit user request sent"));
+      .finally(console.log("edit Avatar request sent"));
   }
 
   editUserAvatar(endPoint, input) {
@@ -65,7 +66,7 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        avatar: input,
+        avatar: input.url,
       }),
     })
       .then((res) => {

@@ -8,6 +8,11 @@ export const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 /* ----------------- DOM DECLARATIONS For profile edit modal ---------------- */
 
+export const profileAvatar = document.querySelector(".profile__picture");
+
+export const profileAvatarEditMOdal =
+  document.querySelector(".modal_avatar-edit");
+
 export const profileEditModal = document.querySelector(".modal_profile-edit");
 
 export const profileModalCloseButton = profileEditModal.querySelector(

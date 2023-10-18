@@ -41,6 +41,8 @@ import {
   profileDescription,
   cardModalAddButton,
   modalConfirmDeleteCard,
+  profileAvatarEditMOdal,
+  profileAvatar,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -61,6 +63,7 @@ import Api from "../components/Api.js";
 api.getCurrentUser("/users/me", {
   name: profileName,
   about: profileDescription,
+  avatar: profileAvatar,
 });
 
 const profileData = {
@@ -88,6 +91,14 @@ const profileEditModalPopup = new PopupWithForm(
     currentUserInfo.setUserInfo(data.title, data.description);
     profileEditModalPopup.close();
     api.editCurrentUser("/users/me", data);
+  }
+);
+
+const profileAvatarEditModalPopup = new PopupWithForm(
+  "#modal_avatar-edit",
+  (data) => {
+    profileAvatarEditModalPopup.close();
+    api.editUserAvatar("/users/me/avatar", data);
   }
 );
 
@@ -138,6 +149,13 @@ function openCardAddModal() {
   formValidators["#form__add-card"].disableSubmitButton();
 }
 
+function openProfileAvatarEditModal() {
+  profileAvatarEditModalPopup.open();
+  formValidators["#modal_avatar-edit"].disableSubmitButton();
+}
+
+profileAvatar.addEventListener("click", openProfileAvatarEditModal);
+
 cardModalAddButton.addEventListener("click", openCardAddModal);
 
 function openEditProfileModal() {
@@ -184,7 +202,11 @@ const config = {
 
 /* ------- When new forms are added make sure to add to forms selector ------- */
 
-const formSelectors = ["#form__edit-profile", "#form__add-card"];
+const formSelectors = [
+  "#form__edit-profile",
+  "#form__add-card",
+  "#modal_avatar-edit",
+];
 
 /* ----------------------------- Initial Scripts ---------------------------- */
 
