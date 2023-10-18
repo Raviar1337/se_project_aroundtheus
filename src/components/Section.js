@@ -5,6 +5,7 @@ export default class Section {
     this._container = container;
   }
   renderItems() {
+    console.log("render items fired");
     this._items.forEach((data) => {
       this._renderer(data);
     });

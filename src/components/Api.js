@@ -32,7 +32,32 @@ export default class Api {
       .finally(console.log("current user request attempted"));
   }
 
-  getCards(endPoint, renderCode) {
+  editCurrentUser(endPoint) {
+    fetch(`${this._url}${endPoint}`, {
+      method: "PATCH",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: "Raviar Veritas",
+        about: "Rouge",
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("edit user request sent"));
+  }
+
+  getCards(endPoint) {
     fetch(`${this._url}${endPoint}`, {
       method: "GET",
       headers: {
@@ -47,6 +72,8 @@ export default class Api {
       })
       .then((result) => {
         console.log(result);
+        const initialCards = result;
+        return initialCards;
       })
       .catch((err) => console.error(err))
       .finally(console.log("All Cards request attempted"));
@@ -75,7 +102,7 @@ export default class Api {
         console.log(result);
       })
       .catch((err) => console.error(err))
-      .finally(console.log("Zug Zug"));
+      .finally(console.log("Card Add Request sent"));
   }
 }
 

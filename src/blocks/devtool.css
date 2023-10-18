@@ -1,8 +1,6 @@
 .devtool {
-  display: flex;
-  padding: 0;
-  max-width: 75vw;
-  max-height: 75vh;
+  visibility: visible;
+  opacity: 1;
 }
 
 .devtool2 {

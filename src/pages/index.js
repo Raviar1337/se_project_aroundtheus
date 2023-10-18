@@ -3,34 +3,32 @@ const api = new Api({
   authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
 });
 
-const initialCards = api.getCards("/cards");
-
-// const initialCards = [
-//   {
-//     name: "YValley",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-//   },
-//   {
-//     name: "Lake Louise",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-//   },
-//   {
-//     name: "Bald Mountains",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-//   },
-//   {
-//     name: "Latemar",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-//   },
-//   {
-//     name: "Vanoise National Park",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-//   },
-//   {
-//     name: "Lago di Braies",
-//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-//   },
-// ];
+const initialCards = [
+  {
+    name: "YValley",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  },
+  {
+    name: "Lake Louise",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  },
+  {
+    name: "Bald Mountains",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  },
+  {
+    name: "Latemar",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  },
+  {
+    name: "Vanoise National Park",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  },
+  {
+    name: "Lago di Braies",
+    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
+  },
+];
 
 /* -------------------------------------------------------------------------- */
 /*                           //------ IMPORTED CODE                           */
@@ -42,6 +40,7 @@ import {
   profileName,
   profileDescription,
   cardModalAddButton,
+  modalConfirmDeleteCard,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -107,9 +106,14 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
 });
 
 function createCard(newCard) {
-  const card = new Card(newCard, "#cardElementTemplate", () => {
-    cardOpenModalPopup.open(newCard);
-  });
+  const card = new Card(
+    newCard,
+    "#cardElementTemplate",
+    () => {
+      cardOpenModalPopup.open(newCard);
+    },
+    () => cardDeleteConfirm.open()
+  );
   return card.getCardElement();
 }
 
@@ -117,6 +121,12 @@ function createCard(newCard) {
 /*                              Open Card Feture                              */
 /* -------------------------------------------------------------------------- */
 const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
+
+/* -------------------------------------------------------------------------- */
+/*                             Delete card fetureZ                            */
+/* -------------------------------------------------------------------------- */
+
+const cardDeleteConfirm = new PopupWithForm(".modal_confirm-delete-card");
 
 /* -------------------------------------------------------------------------- */
 /*                                 Page Interactions                          */
@@ -144,6 +154,7 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------- Web Page Sections --------------------------- */
+api.getCards("/cards");
 
 const cardsListSection = new Section(
   {
@@ -155,6 +166,7 @@ const cardsListSection = new Section(
   },
   cardsList
 );
+cardsListSection.renderItems();
 
 /* ---------------------- form validation configuration --------------------- */
 
@@ -176,6 +188,8 @@ const formSelectors = ["#form__edit-profile", "#form__add-card"];
 /* ----------------------------- Initial Scripts ---------------------------- */
 
 //enableClosingModalFeature(modalBackgrounds);
+
+// cardsListSection.renderItems()
 
 const formValidators = {};
 
@@ -199,6 +213,8 @@ formSelectors.forEach((selector) => {
 /* -------------------------------------------------------------------------- */
 /*                               API CODE BELOW                               */
 /* -------------------------------------------------------------------------- */
+
+api.editCurrentUser("/users/me");
 
 /* -------------------------------------------------------------------------- */
 /*                               example request                              */

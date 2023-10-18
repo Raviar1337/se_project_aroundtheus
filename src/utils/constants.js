@@ -79,3 +79,9 @@ export const inputCardName = cardAddModal.querySelector(
 export const inputImageLink = cardAddModal.querySelector(
   ".modal__input_type_description"
 );
+
+/* ------------------ DOM Declarations for confirmation box ----------------- */
+
+export const modalConfirmDeleteCard = document.querySelector(
+  ".modal_confirm-delete-card"
+);

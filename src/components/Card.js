@@ -7,11 +7,12 @@
 // } from "../utils/utils.js";
 
 export default class Card {
-  constructor(data, templateSelector, handleImageClick) {
+  constructor(data, templateSelector, handleImageClick, handleDeleteClick) {
     this._name = data.name;
     this._link = data.link;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteClick = handleDeleteClick;
   }
 
   //---- private method for each event handler goes here
@@ -29,7 +30,8 @@ export default class Card {
   }
 
   _cardDeleteButtonEventHandler() {
-    this._cardElement.remove();
+    this._handleDeleteClick();
+    //this._cardElement.remove();
   }
 
   //---- private methods for working with markup and adding event handlers goes here
