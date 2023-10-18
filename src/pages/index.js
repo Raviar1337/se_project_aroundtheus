@@ -43,6 +43,7 @@ import {
   modalConfirmDeleteCard,
   profileAvatarEditMOdal,
   profileAvatar,
+  profileAvatarOverlay,
 } from "../utils/constants.js";
 
 import Card from "../components/Card.js";
@@ -154,7 +155,7 @@ function openProfileAvatarEditModal() {
   formValidators["#modal_avatar-edit"].disableSubmitButton();
 }
 
-profileAvatar.addEventListener("click", openProfileAvatarEditModal);
+profileAvatarOverlay.addEventListener("click", openProfileAvatarEditModal);
 
 cardModalAddButton.addEventListener("click", openCardAddModal);
 

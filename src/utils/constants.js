@@ -10,6 +10,10 @@ export const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 export const profileAvatar = document.querySelector(".profile__picture");
 
+export const profileAvatarOverlay = document.querySelector(
+  ".profile__picture-overlay"
+);
+
 export const profileAvatarEditMOdal =
   document.querySelector(".modal_avatar-edit");
 
