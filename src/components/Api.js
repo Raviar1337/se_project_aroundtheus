@@ -32,7 +32,7 @@ export default class Api {
       .finally(console.log("current user request attempted"));
   }
 
-  editCurrentUser(endPoint) {
+  editCurrentUser(endPoint, input) {
     fetch(`${this._url}${endPoint}`, {
       method: "PATCH",
       headers: {
@@ -40,8 +40,32 @@ export default class Api {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        name: "Raviar Veritas",
-        about: "Rouge",
+        name: input.title,
+        about: input.description,
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("edit user request sent"));
+  }
+
+  editUserAvatar(endPoint, input) {
+    fetch(`${this._url}${endPoint}`, {
+      method: "PATCH",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        avatar: input,
       }),
     })
       .then((res) => {
@@ -91,6 +115,28 @@ export default class Api {
         link: input.link,
         name: input.name,
       }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("Card Add Request sent"));
+  }
+
+  deleteCard(endPoint, cardId) {
+    console.log(cardId);
+    fetch(`${this._url}${endPoint}${cardId}`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
     })
       .then((res) => {
         if (res.ok) {

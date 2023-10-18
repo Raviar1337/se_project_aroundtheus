@@ -87,6 +87,7 @@ const profileEditModalPopup = new PopupWithForm(
   (data) => {
     currentUserInfo.setUserInfo(data.title, data.description);
     profileEditModalPopup.close();
+    api.editCurrentUser("/users/me", data);
   }
 );
 
@@ -214,7 +215,8 @@ formSelectors.forEach((selector) => {
 /*                               API CODE BELOW                               */
 /* -------------------------------------------------------------------------- */
 
-api.editCurrentUser("/users/me");
+//delete is hard coded for now, will eventgually add input
+api.deleteCard("/cards/", "652e8963beb738001aecbb32");
 
 /* -------------------------------------------------------------------------- */
 /*                               example request                              */
