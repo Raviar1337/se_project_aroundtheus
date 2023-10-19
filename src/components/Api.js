@@ -97,8 +97,6 @@ export default class Api {
       })
       .then((result) => {
         console.log(result);
-        const initialCards = result;
-        return initialCards;
       })
       .catch((err) => console.error(err))
       .finally(console.log("All Cards request attempted"));
@@ -150,6 +148,50 @@ export default class Api {
       })
       .catch((err) => console.error(err))
       .finally(console.log("Card Add Request sent"));
+  }
+
+  likeCard(endPoint, cardId) {
+    console.log(cardId);
+    fetch(`${this._url}${endPoint}${cardId}/likes`, {
+      method: "PUT",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("Card Like sent"));
+  }
+
+  disLikeCard(endPoint, cardId) {
+    console.log(cardId);
+    fetch(`${this._url}${endPoint}${cardId}/likes`, {
+      method: "DELETE",
+      headers: {
+        authorization: this.authorization,
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+        return Promise.reject(`Something went wrong ${res.status}`);
+      })
+      .then((result) => {
+        console.log(result);
+      })
+      .catch((err) => console.error(err))
+      .finally(console.log("Card Like sent"));
   }
 }
 

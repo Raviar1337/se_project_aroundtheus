@@ -4,32 +4,32 @@ const api = new Api({
 });
 
 const initialCards = [
-  {
-    name: "YValley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
+  // {
+  //   name: "YValley",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+  // },
+  // {
+  //   name: "Lake Louise",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+  // },
+  // {
+  //   name: "Bald Mountains",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+  // },
+  // {
+  //   name: "Latemar",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+  // },
+  // {
+  //   name: "Vanoise National Park",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+  // },
+  // {
+  //   name: "Lago di Braies",
+  //   link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
+  // },
 ];
-
+console.log(initialCards);
 /* -------------------------------------------------------------------------- */
 /*                           //------ IMPORTED CODE                           */
 /* -------------------------------------------------------------------------- */
@@ -174,7 +174,6 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 /* -------------------------------------------------------------------------- */
 
 /* --------------------------- Web Page Sections --------------------------- */
-api.getCards("/cards");
 
 const cardsListSection = new Section(
   {
@@ -186,7 +185,9 @@ const cardsListSection = new Section(
   },
   cardsList
 );
-cardsListSection.renderItems();
+//cardsListSection.renderItems();
+
+api.getCards("/cards");
 
 /* ---------------------- form validation configuration --------------------- */
 
@@ -239,8 +240,10 @@ formSelectors.forEach((selector) => {
 /* -------------------------------------------------------------------------- */
 
 //delete is hard coded for now, will eventgually add input
-api.deleteCard("/cards/", "652e8963beb738001aecbb32");
+//api.deleteCard("/cards/", "652e8963beb738001aecbb32");
 
+api.likeCard("/cards/", "65306057369eff001aa738d9");
+api.disLikeCard("/cards/", "65306057369eff001aa738d9");
 /* -------------------------------------------------------------------------- */
 /*                               example request                              */
 /* -------------------------------------------------------------------------- */
