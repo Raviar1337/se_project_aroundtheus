@@ -82,7 +82,7 @@ export default class Api {
       .finally(console.log("edit user request sent"));
   }
 
-  getCards(endPoint) {
+  getCards(endPoint, cardsListSection, initialCards) {
     fetch(`${this._url}${endPoint}`, {
       method: "GET",
       headers: {
@@ -95,9 +95,14 @@ export default class Api {
         }
         return Promise.reject(`Something went wrong ${res.status}`);
       })
-      .then((result) => {
-        console.log(result);
-      })
+      // .then((result) => {
+      //   console.log(result);
+      //   return (initialCards = result);
+      //   // initialCards.push(result[1]);
+      //   // console.log(result[1]);
+      //   //console.log(initialCards);
+      // })
+      .then((result) => cardsListSection.renderItems(result))
       .catch((err) => console.error(err))
       .finally(console.log("All Cards request attempted"));
   }
@@ -191,7 +196,7 @@ export default class Api {
         console.log(result);
       })
       .catch((err) => console.error(err))
-      .finally(console.log("Card Like sent"));
+      .finally(console.log("Card Dislike sent"));
   }
 }
 

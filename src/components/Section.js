@@ -4,9 +4,10 @@ export default class Section {
     this._renderer = renderer;
     this._container = container;
   }
-  renderItems() {
+  //lets cause some problems to undo remove first items and add "this._" to second items
+  renderItems(items) {
     console.log("render items fired");
-    this._items.forEach((data) => {
+    items.forEach((data) => {
       this._renderer(data);
     });
   }
