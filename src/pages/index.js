@@ -40,8 +40,8 @@ import {
   profileName,
   profileDescription,
   cardModalAddButton,
-  modalConfirmDeleteCard,
-  profileAvatarEditMOdal,
+  // modalConfirmDeleteCard,
+  // profileAvatarEditMOdal,
   profileAvatar,
   profileAvatarOverlay,
 } from "../utils/constants.js";
