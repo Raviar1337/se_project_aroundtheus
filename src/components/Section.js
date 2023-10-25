@@ -15,6 +15,10 @@ export default class Section {
   addItem(listElement) {
     this._container.prepend(listElement);
   }
+
+  addInitialItems(listElement) {
+    this._container.append(listElement);
+  }
 }
 
 // It has an object with two properties (items and renderer) as the first parameter of the constructor.

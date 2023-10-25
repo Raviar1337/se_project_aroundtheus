@@ -198,7 +198,7 @@ const cardsListSection = new Section(
     items: initialCards,
     renderer: (data) => {
       const card = createCard(data);
-      cardsListSection.addItem(card);
+      cardsListSection.addInitialItems(card);
     },
   },
   cardsList
