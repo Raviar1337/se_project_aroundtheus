@@ -140,7 +140,20 @@ function createCard(newCard) {
         }
       );
       cardDeleteConfirm.open();
+    },
+
+    () => {
+      console.log("API for like event fired");
+
+      api.likeCard("/cards/", newCard._id);
+    },
+    () => {
+      console.log("API for dislike event fired");
+      api.disLikeCard("/cards/", newCard._id);
     }
+
+    //api.likeCard("/cards/", "65306057369eff001aa738d9");
+    //api.disLikeCard("/cards/", "65306057369eff001aa738d9");
   );
   return card.getCardElement();
 }

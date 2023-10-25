@@ -152,7 +152,7 @@ export default class Api {
 
   likeCard(endPoint, cardId) {
     console.log(cardId);
-    fetch(`${this._url}${endPoint}${cardId}/likes`, {
+    return fetch(`${this._url}${endPoint}${cardId}/likes`, {
       method: "PUT",
       headers: {
         authorization: this.authorization,
@@ -167,6 +167,7 @@ export default class Api {
       })
       .then((result) => {
         console.log(result);
+        return result;
       })
       .catch((err) => console.error(err))
       .finally(console.log("Card Like sent"));
@@ -174,7 +175,7 @@ export default class Api {
 
   disLikeCard(endPoint, cardId) {
     console.log(cardId);
-    fetch(`${this._url}${endPoint}${cardId}/likes`, {
+    return fetch(`${this._url}${endPoint}${cardId}/likes`, {
       method: "DELETE",
       headers: {
         authorization: this.authorization,
@@ -189,6 +190,7 @@ export default class Api {
       })
       .then((result) => {
         console.log(result);
+        return result;
       })
       .catch((err) => console.error(err))
       .finally(console.log("Card Dislike sent"));

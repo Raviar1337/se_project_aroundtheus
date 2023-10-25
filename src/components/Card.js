@@ -7,10 +7,20 @@
 // } from "../utils/utils.js";
 
 export default class Card {
-  constructor(data, templateSelector, handleImageClick, handleDeleteClick) {
+  constructor(
+    data,
+    templateSelector,
+    handleImageClick,
+    handleDeleteClick,
+    handleLike,
+    handleDislike
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
+    this._isLiked = data.isLiked;
+    this._handleLike = handleLike;
+    this._handleDislike = handleDislike;
     this._templateSelector = templateSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteClick = handleDeleteClick;
@@ -19,15 +29,19 @@ export default class Card {
   //---- private method for each event handler goes here
 
   _cardLikeButtonToggleEventHandler() {
-    const isLiked = this._cardLikeButton.dataset.liked === "true";
-    if (isLiked) {
+    console.log("toggle event fired");
+    console.log(this._cardLikeButton.dataset.liked === "true");
+    if (this._cardLikeButton.dataset.liked === "true") {
+      console.log("dislike event fired");
+      this._handleDislike();
       this._cardLikeButton.dataset.liked = "false";
       this._cardLikeButtonImage.src = "../images/Cardlikebutton.svg";
-      return;
+    } else {
+      console.log("Like event fired");
+      this._handleLike();
+      this._cardLikeButton.dataset.liked = "true";
+      this._cardLikeButtonImage.src = "../images/LikeButtonActive.svg";
     }
-
-    this._cardLikeButton.dataset.liked = "true";
-    this._cardLikeButtonImage.src = "../images/LikeButtonActive.svg";
   }
 
   _cardDeleteButtonEventHandler() {
@@ -47,6 +61,7 @@ export default class Card {
 
     this._cardLikeButton.addEventListener("click", () => {
       this._cardLikeButtonToggleEventHandler();
+      console.log("like button was clicked");
     });
 
     this._cardDeleteButton.addEventListener("click", () => {
@@ -74,6 +89,13 @@ export default class Card {
     this._cardTitleElement.textContent = this._name;
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
+    this._cardLikeButton.dataset.liked = this._isLiked;
+    // this._cardLikeButtonImage.src = () => {if (this._cardLikeButton.dataset.liked === "true") {
+    //   // put code here that designates imags
+
+    // } else {
+
+    // }}
 
     this._setCardClassEventListeners();
 
