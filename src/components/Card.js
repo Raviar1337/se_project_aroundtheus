@@ -32,7 +32,10 @@ export default class Card {
 
   _cardDeleteButtonEventHandler() {
     this._handleDeleteClick();
-    //this._cardElement.remove();
+  }
+
+  removeSelf() {
+    this._cardElement.remove();
   }
 
   //---- private methods for working with markup and adding event handlers goes here

@@ -5,7 +5,7 @@ export default class Api {
   }
 
   getCurrentUser(endPoint, DOMLocations) {
-    fetch(`${this._url}${endPoint}`, {
+    return fetch(`${this._url}${endPoint}`, {
       method: "GET",
       headers: {
         authorization: this.authorization,
@@ -29,8 +29,7 @@ export default class Api {
         // };
         // return profileData;
       })
-      .catch((err) => console.error(err))
-      .finally(console.log("current user request attempted"));
+      .catch((err) => console.error(err));
   }
 
   editCurrentUser(endPoint, input) {
@@ -54,8 +53,7 @@ export default class Api {
       .then((result) => {
         console.log(result);
       })
-      .catch((err) => console.error(err))
-      .finally(console.log("edit Avatar request sent"));
+      .catch((err) => console.error(err));
   }
 
   editUserAvatar(endPoint, input) {
@@ -78,8 +76,7 @@ export default class Api {
       .then((result) => {
         console.log(result);
       })
-      .catch((err) => console.error(err))
-      .finally(console.log("edit user request sent"));
+      .catch((err) => console.error(err));
   }
 
   getCards(endPoint, cardsListSection, initialCards) {
@@ -103,13 +100,12 @@ export default class Api {
       //   //console.log(initialCards);
       // })
       .then((result) => cardsListSection.renderItems(result))
-      .catch((err) => console.error(err))
-      .finally(console.log("All Cards request attempted"));
+      .catch((err) => console.error(err));
   }
 
   postCard(endPoint, input) {
     console.log(input);
-    fetch(`${this._url}${endPoint}`, {
+    return fetch(`${this._url}${endPoint}`, {
       method: "POST",
       headers: {
         authorization: this.authorization,
@@ -128,9 +124,9 @@ export default class Api {
       })
       .then((result) => {
         console.log(result);
+        return result;
       })
-      .catch((err) => console.error(err))
-      .finally(console.log("Card Add Request sent"));
+      .catch((err) => console.error(err));
   }
 
   deleteCard(endPoint, cardId) {
@@ -151,8 +147,7 @@ export default class Api {
       .then((result) => {
         console.log(result);
       })
-      .catch((err) => console.error(err))
-      .finally(console.log("Card Add Request sent"));
+      .catch((err) => console.error(err));
   }
 
   likeCard(endPoint, cardId) {

@@ -57,6 +57,7 @@ import UserInfo from "../components/UserInfo.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import Api from "../components/Api.js";
+import PopupWithConfirm from "../components/PopUpWithConfirm.js";
 
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
@@ -115,7 +116,11 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
     link: data.url,
   };
 
-  api.postCard("/cards", newCard);
+  api.postCard("/cards", newCard).then((res) => {
+    console.log(res);
+    const cardElement = createCard(res);
+    cardsListSection.addItem(cardElement);
+  });
 });
 
 function createCard(newCard) {
@@ -125,7 +130,17 @@ function createCard(newCard) {
     () => {
       cardOpenModalPopup.open(newCard);
     },
-    () => cardDeleteConfirm.open()
+
+    () => {
+      const cardDeleteConfirm = new PopupWithConfirm(
+        ".modal_confirm-delete-card",
+        () => {
+          api.deleteCard("/cards/", newCard._id);
+          card.removeSelf();
+        }
+      );
+      cardDeleteConfirm.open();
+    }
   );
   return card.getCardElement();
 }
@@ -136,10 +151,13 @@ function createCard(newCard) {
 const cardOpenModalPopup = new PopupWithImage(".modal_card-open");
 
 /* -------------------------------------------------------------------------- */
-/*                             Delete card fetureZ                            */
+/*                             Delete card feture                            */
 /* -------------------------------------------------------------------------- */
 
-const cardDeleteConfirm = new PopupWithForm(".modal_confirm-delete-card");
+// const cardDeleteConfirm = new PopupWithConfirm(
+//   ".modal_confirm-delete-card",
+//   api.deleteCard()
+// );
 
 /* -------------------------------------------------------------------------- */
 /*                                 Page Interactions                          */
