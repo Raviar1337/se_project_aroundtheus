@@ -57,7 +57,7 @@ export default class Api {
   }
 
   editUserAvatar(endPoint, input) {
-    fetch(`${this._url}${endPoint}`, {
+    return fetch(`${this._url}${endPoint}`, {
       method: "PATCH",
       headers: {
         authorization: this.authorization,
@@ -73,9 +73,7 @@ export default class Api {
         }
         return Promise.reject(`Something went wrong ${res.status}`);
       })
-      .then((result) => {
-        console.log(result);
-      })
+
       .catch((err) => console.error(err));
   }
 

@@ -35,12 +35,12 @@ export default class Card {
       console.log("dislike event fired");
       this._handleDislike();
       this._cardLikeButton.dataset.liked = "false";
-      this._cardLikeButtonImage.src = "../images/Cardlikebutton.svg";
+      this._cardLikeButton.classList.remove("card__like-button-active");
     } else {
       console.log("Like event fired");
       this._handleLike();
       this._cardLikeButton.dataset.liked = "true";
-      this._cardLikeButtonImage.src = "../images/LikeButtonActive.svg";
+      this._cardLikeButton.classList.add("card__like-button-active");
     }
   }
 
@@ -90,6 +90,10 @@ export default class Card {
     this._cardImageElement.src = this._link;
     this._cardImageElement.alt = this._name;
     this._cardLikeButton.dataset.liked = this._isLiked;
+
+    if (this._isLiked) {
+      this._cardLikeButton.classList.add("card__like-button-active");
+    }
     // this._cardLikeButtonImage.src = () => {if (this._cardLikeButton.dataset.liked === "true") {
     //   // put code here that designates imags
 

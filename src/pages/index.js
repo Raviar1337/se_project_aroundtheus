@@ -100,7 +100,9 @@ const profileAvatarEditModalPopup = new PopupWithForm(
   "#modal_avatar-edit",
   (data) => {
     profileAvatarEditModalPopup.close();
-    api.editUserAvatar("/users/me/avatar", data);
+    api.editUserAvatar("/users/me/avatar", data).then((res) => {
+      profileAvatar.src = res.avatar;
+    });
   }
 );
 
