@@ -1,9 +1,9 @@
 import Popup from "./Popup.js";
 
 export default class PopupWithConfirm extends Popup {
-  constructor(popupSelector, confirmHandler) {
+  constructor(popupSelector, _handleConfirm) {
     super(popupSelector);
-    this._confirmHandler = confirmHandler;
+    this.__handleConfirm = _handleConfirm;
   }
 
   open() {
@@ -18,11 +18,11 @@ export default class PopupWithConfirm extends Popup {
     evt.preventDefault();
     this._handleConfirm();
 
-    this.close();
+    // this.close();
   };
 
   _handleConfirm() {
-    this._confirmHandler();
+    this.__handleConfirm();
   }
 
   _setEventListeners() {

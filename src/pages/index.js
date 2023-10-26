@@ -62,11 +62,21 @@ import PopupWithConfirm from "../components/PopUpWithConfirm.js";
 /* -------------------------------------------------------------------------- */
 /*                                  test area                                 */
 /* -------------------------------------------------------------------------- */
-api.getCurrentUser("/users/me", {
-  name: profileName,
-  about: profileDescription,
-  avatar: profileAvatar,
-});
+api
+  .getCurrentUser("/users/me")
+  .then((result) => {
+    console.log(result);
+    console.log("umm now what??");
+    profileName.textContent = result.name;
+    profileDescription.textContent = result.about;
+    profileAvatar.src = result.avatar;
+    // const profileData = {
+    //   name: result.name,
+    //   job: result.about,
+    // };
+    // return profileData;
+  })
+  .catch((err) => console.error(err));
 
 const profileData = {
   name: profileName,
@@ -90,19 +100,27 @@ console.log(currentUserInfo.getUserInfo());
 const profileEditModalPopup = new PopupWithForm(
   "#modal_profile-edit",
   (data) => {
-    currentUserInfo.setUserInfo(data.title, data.description);
-    profileEditModalPopup.close();
-    api.editCurrentUser("/users/me", data);
+    //currentUserInfo.setUserInfo(data.title, data.description);
+    //profileEditModalPopup.close();
+    api
+      .editCurrentUser("/users/me", data)
+      .then(profileEditModalPopup.close())
+      .then(currentUserInfo.setUserInfo(data.title, data.description))
+      .catch((err) => console.error(err));
   }
 );
 
 const profileAvatarEditModalPopup = new PopupWithForm(
   "#modal_avatar-edit",
   (data) => {
-    profileAvatarEditModalPopup.close();
-    api.editUserAvatar("/users/me/avatar", data).then((res) => {
-      profileAvatar.src = res.avatar;
-    });
+    // profileAvatarEditModalPopup.close();
+    api
+      .editUserAvatar("/users/me/avatar", data)
+      .then((res) => {
+        profileAvatar.src = res.avatar;
+      })
+      .then(profileAvatarEditModalPopup.close())
+      .catch((err) => console.error(err));
   }
 );
 
@@ -118,11 +136,15 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
     link: data.url,
   };
 
-  api.postCard("/cards", newCard).then((res) => {
-    console.log(res);
-    const cardElement = createCard(res);
-    cardsListSection.addItem(cardElement);
-  });
+  api
+    .postCard("/cards", newCard)
+    .then((res) => {
+      console.log(res);
+      const cardElement = createCard(res);
+      cardsListSection.addItem(cardElement);
+    })
+    .then(addCardModalPopup.close())
+    .catch((err) => console.error(err));
 });
 
 function createCard(newCard) {
@@ -137,8 +159,12 @@ function createCard(newCard) {
       const cardDeleteConfirm = new PopupWithConfirm(
         ".modal_confirm-delete-card",
         () => {
-          api.deleteCard("/cards/", newCard._id);
-          card.removeSelf();
+          api
+            .deleteCard("/cards/", newCard._id)
+            .then(card.removeSelf())
+            .then(cardDeleteConfirm.close())
+            .catch((err) => console.error(err));
+          //card.removeSelf();
         }
       );
       cardDeleteConfirm.open();
@@ -147,11 +173,13 @@ function createCard(newCard) {
     () => {
       console.log("API for like event fired");
 
-      api.likeCard("/cards/", newCard._id);
+      api.likeCard("/cards/", newCard._id).catch((err) => console.error(err));
     },
     () => {
       console.log("API for dislike event fired");
-      api.disLikeCard("/cards/", newCard._id);
+      api
+        .disLikeCard("/cards/", newCard._id)
+        .catch((err) => console.error(err));
     }
 
     //api.likeCard("/cards/", "65306057369eff001aa738d9");
@@ -220,7 +248,9 @@ const cardsListSection = new Section(
 );
 // cardsListSection.renderItems();
 
-api.getCards("/cards", cardsListSection, initialCards);
+api
+  .getCards("/cards", cardsListSection, initialCards)
+  .catch((err) => console.error(err));
 
 /* ---------------------- form validation configuration --------------------- */
 
