@@ -10,7 +10,7 @@ export default class PopupWithForm extends Popup {
   setSaveButtonText(input) {
     const saveButton = this._popupElement.querySelector(".modal__save-button");
     saveButton.textContent = input;
-    return saveButton.textContent;
+    // return saveButton.textContent;
   }
 
   open() {

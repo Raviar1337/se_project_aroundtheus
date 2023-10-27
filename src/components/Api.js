@@ -15,15 +15,15 @@ export default class Api {
     return Promise.reject(`Error: ${res.status}`);
   };
 
-  getCurrentUser(endPoint) {
-    return fetch(`${this._url}${endPoint}`, {
+  getCurrentUser() {
+    return fetch(`${this._url}/users/me`, {
       method: "GET",
       headers: this._headers,
     }).then(this._processResponse);
   }
 
-  editCurrentUser(endPoint, input) {
-    return fetch(`${this._url}${endPoint}`, {
+  editCurrentUser(input) {
+    return fetch(`${this._url}/users/me`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -38,8 +38,8 @@ export default class Api {
     // .catch((err) => console.error(err));
   }
 
-  editUserAvatar(endPoint, input) {
-    return fetch(`${this._url}${endPoint}`, {
+  editUserAvatar(input) {
+    return fetch(`${this._url}/users/me/avatar`, {
       method: "PATCH",
       headers: this._headers,
       body: JSON.stringify({
@@ -50,28 +50,25 @@ export default class Api {
     // .catch((err) => console.error(err));
   }
 
-  getCards(endPoint, cardsListSection, initialCards) {
-    return (
-      fetch(`${this._url}${endPoint}`, {
-        method: "GET",
-        headers: this._headers,
-      })
-        .then(this._processResponse)
-        // .then((result) => {
-        //   console.log(result);
-        //   return (initialCards = result);
-        //   // initialCards.push(result[1]);
-        //   // console.log(result[1]);
-        //   //console.log(initialCards);
-        // })
-        .then((result) => cardsListSection.renderItems(result))
-      // .catch((err) => console.error(err))
-    );
+  getCards() {
+    return fetch(`${this._url}/cards`, {
+      method: "GET",
+      headers: this._headers,
+    }).then(this._processResponse);
+    // .then((result) => {
+    //   console.log(result);
+    //   return (initialCards = result);
+    //   // initialCards.push(result[1]);
+    //   // console.log(result[1]);
+    //   //console.log(initialCards);
+    // })
+    //.then((result) => cardsListSection.renderItems(result))
+    // .catch((err) => console.error(err))
   }
 
-  postCard(endPoint, input) {
+  postCard(input) {
     console.log(input);
-    return fetch(`${this._url}${endPoint}`, {
+    return fetch(`${this._url}/cards`, {
       method: "POST",
       headers: this._headers,
       body: JSON.stringify({
@@ -86,22 +83,21 @@ export default class Api {
     // .catch((err) => console.error(err));
   }
 
-  deleteCard(endPoint, cardId) {
+  deleteCard(cardId) {
     console.log(cardId);
-    return fetch(`${this._url}${endPoint}${cardId}`, {
+    return fetch(`${this._url}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._processResponse)
-      .then((result) => {
-        console.log(result);
-      });
-    // .catch((err) => console.error(err));
+    }).then(this._processResponse);
+    //   .then((result) => {
+    //     console.log(result);
+    //   });
+    // // .catch((err) => console.error(err));
   }
 
-  likeCard(endPoint, cardId) {
+  likeCard(cardId) {
     console.log(cardId);
-    return fetch(`${this._url}${endPoint}${cardId}/likes`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
     }).then(this._processResponse);
@@ -109,9 +105,9 @@ export default class Api {
     // .catch((err) => console.error(err))
   }
 
-  disLikeCard(endPoint, cardId) {
+  disLikeCard(cardId) {
     console.log(cardId);
-    return fetch(`${this._url}${endPoint}${cardId}/likes`, {
+    return fetch(`${this._url}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
     }).then(this._processResponse);

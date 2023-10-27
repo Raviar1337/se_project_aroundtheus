@@ -21,6 +21,12 @@ export default class PopupWithConfirm extends Popup {
     // this.close();
   };
 
+  setSaveButtonText(input) {
+    const saveButton = this._popupElement.querySelector(".modal__save-button");
+    saveButton.textContent = input;
+    // return saveButton.textContent;
+  }
+
   _handleConfirm() {
     this.__handleConfirm();
   }

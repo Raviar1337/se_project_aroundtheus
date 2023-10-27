@@ -16,7 +16,7 @@ export default class Section {
     this._container.prepend(listElement);
   }
 
-  addInitialItems(listElement) {
+  appendItem(listElement) {
     this._container.append(listElement);
   }
 }

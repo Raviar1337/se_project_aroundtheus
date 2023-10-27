@@ -3,33 +3,33 @@ const api = new Api({
   authorization: "ed64b8cb-b7cb-483b-9267-3e840bed2c98",
 });
 
-const initialCards = [
-  {
-    name: "YValley",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
-  },
-  {
-    name: "Lake Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
-  },
-  {
-    name: "Bald Mountains",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
-  },
-  {
-    name: "Vanoise National Park",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
-  },
-];
-console.log(initialCards);
+// const initialCards = [
+//   {
+//     name: "YValley",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/yosemite.jpg",
+//   },
+//   {
+//     name: "Lake Louise",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lake-louise.jpg",
+//   },
+//   {
+//     name: "Bald Mountains",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/bald-mountains.jpg",
+//   },
+//   {
+//     name: "Latemar",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/latemar.jpg",
+//   },
+//   {
+//     name: "Vanoise National Park",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/vanoise.jpg",
+//   },
+//   {
+//     name: "Lago di Braies",
+//     link: "https://practicum-content.s3.us-west-1.amazonaws.com/software-engineer/around-project/lago.jpg ",
+//   },
+// ];
+// console.log(initialCards);
 /* -------------------------------------------------------------------------- */
 /*                           //------ IMPORTED CODE                           */
 /* -------------------------------------------------------------------------- */
@@ -63,13 +63,16 @@ import PopupWithConfirm from "../components/PopUpWithConfirm.js";
 /*                                  test area                                 */
 /* -------------------------------------------------------------------------- */
 api
-  .getCurrentUser("/users/me")
+  .getCurrentUser()
   .then((result) => {
     console.log(result);
     console.log("umm now what??");
-    profileName.textContent = result.name;
-    profileDescription.textContent = result.about;
-    profileAvatar.src = result.avatar;
+    currentUserInfo.setUserInfo(result.name, result.about);
+    currentUserInfo.setUserAvatar(result);
+    console.log(currentUserInfo.getUserInfo());
+    // profileName.textContent = result.name;
+    // profileDescription.textContent = result.about;
+    // profileAvatar.src = result.avatar;
     // const profileData = {
     //   name: result.name,
     //   job: result.about,
@@ -86,9 +89,9 @@ const profileData = {
 
 const currentUserInfo = new UserInfo(profileData);
 
-console.log(profileData);
+//console.log(profileData);
 
-console.log(currentUserInfo.getUserInfo());
+//console.log(currentUserInfo.getUserInfo());
 
 /* -------------------------------------------------------------------------- */
 /*                              end of test area                              */
@@ -107,11 +110,16 @@ const profileEditModalPopup = new PopupWithForm(
     profileEditModalPopup.setSaveButtonText("Updating");
 
     api
-      .editCurrentUser("/users/me", data)
-      .then(profileEditModalPopup.close())
-      .then(currentUserInfo.setUserInfo(data.title, data.description))
+      .editCurrentUser(data)
+      .then(() => {
+        currentUserInfo.setUserInfo(data.title, data.description);
+        profileEditModalPopup.close();
+      })
+
       .catch((err) => console.error(err))
-      .finally(profileEditModalPopup.setSaveButtonText("Save"));
+      .finally(() => {
+        profileEditModalPopup.setSaveButtonText("Save");
+      });
   }
 );
 
@@ -122,14 +130,17 @@ const profileAvatarEditModalPopup = new PopupWithForm(
     // profileAvatarEditModalPopup.updating();
     profileEditModalPopup.setSaveButtonText("Updating");
     api
-      .editUserAvatar("/users/me/avatar", data)
+      .editUserAvatar(data)
       .then((res) => {
         profileAvatar.src = res.avatar;
         currentUserInfo.setUserAvatar(res);
+        profileAvatarEditModalPopup.close();
       })
-      .then(profileAvatarEditModalPopup.close())
+
       .catch((err) => console.error(err))
-      .finally(profileEditModalPopup.setSaveButtonText("Save"));
+      .finally(() => {
+        profileEditModalPopup.setSaveButtonText("Save");
+      });
   }
 );
 
@@ -148,15 +159,18 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
   addCardModalPopup.setSaveButtonText("Updating");
 
   api
-    .postCard("/cards", newCard)
+    .postCard(newCard)
     .then((res) => {
       console.log(res);
       const cardElement = createCard(res);
       cardsListSection.addItem(cardElement);
+      addCardModalPopup.close();
     })
-    .then(addCardModalPopup.close())
+
     .catch((err) => console.error(err))
-    .finally(addCardModalPopup.setSaveButtonText("Save"));
+    .finally(() => {
+      addCardModalPopup.setSaveButtonText("Save");
+    });
 });
 
 function createCard(newCard) {
@@ -171,11 +185,18 @@ function createCard(newCard) {
       const cardDeleteConfirm = new PopupWithConfirm(
         ".modal_confirm-delete-card",
         () => {
+          cardDeleteConfirm.setSaveButtonText("Deleting");
           api
-            .deleteCard("/cards/", newCard._id)
-            .then(card.removeSelf())
-            .then(cardDeleteConfirm.close())
-            .catch((err) => console.error(err));
+            .deleteCard(newCard._id)
+            .then(() => {
+              card.removeSelf();
+              cardDeleteConfirm.close();
+            })
+
+            .catch((err) => console.error(err))
+            .finally(() => {
+              cardDeleteConfirm.setSaveButtonText("Yes");
+            });
           //card.removeSelf();
         }
       );
@@ -185,13 +206,13 @@ function createCard(newCard) {
     () => {
       if (card.isLiked()) {
         api
-          .disLikeCard("/cards/", newCard._id)
+          .disLikeCard(newCard._id)
           .then((response) => card.setIsLiked(response.isLiked))
 
           .catch((err) => console.error(err));
       } else {
         api
-          .likeCard("/cards/", newCard._id)
+          .likeCard(newCard._id)
           .then((response) => card.setIsLiked(response.isLiked))
 
           .catch((err) => console.error(err));
@@ -258,20 +279,35 @@ profileModalEditButton.addEventListener("click", openEditProfileModal);
 
 /* --------------------------- Web Page Sections --------------------------- */
 
-const cardsListSection = new Section(
-  {
-    items: initialCards,
-    renderer: (data) => {
-      const card = createCard(data);
-      cardsListSection.addInitialItems(card);
-    },
-  },
-  cardsList
-);
+let cardsListSection;
+
+// = new Section(
+//   {
+//     items: initialCards,
+//     renderer: (data) => {
+//       const card = createCard(data);
+//       cardsListSection.appendItem(card);
+//     },
+//   },
+//   cardsList
+// );
 // cardsListSection.renderItems();
 
 api
-  .getCards("/cards", cardsListSection, initialCards)
+  .getCards()
+  .then((initialCards) => {
+    cardsListSection = new Section(
+      {
+        items: initialCards,
+        renderer: (data) => {
+          const card = createCard(data);
+          cardsListSection.appendItem(card);
+        },
+      },
+      cardsList
+    );
+    cardsListSection.renderItems(initialCards);
+  })
   .catch((err) => console.error(err));
 
 /* ---------------------- form validation configuration --------------------- */
