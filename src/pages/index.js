@@ -81,6 +81,7 @@ api
 const profileData = {
   name: profileName,
   job: profileDescription,
+  avatar: profileAvatar,
 };
 
 const currentUserInfo = new UserInfo(profileData);
@@ -102,6 +103,7 @@ const profileEditModalPopup = new PopupWithForm(
   (data) => {
     //currentUserInfo.setUserInfo(data.title, data.description);
     //profileEditModalPopup.close();
+    profileEditModalPopup.updating();
     api
       .editCurrentUser("/users/me", data)
       .then(profileEditModalPopup.close())
@@ -114,10 +116,12 @@ const profileAvatarEditModalPopup = new PopupWithForm(
   "#modal_avatar-edit",
   (data) => {
     // profileAvatarEditModalPopup.close();
+    // profileAvatarEditModalPopup.updating();
     api
       .editUserAvatar("/users/me/avatar", data)
       .then((res) => {
         profileAvatar.src = res.avatar;
+        currentUserInfo.setUserAvatar(res);
       })
       .then(profileAvatarEditModalPopup.close())
       .catch((err) => console.error(err));
@@ -171,15 +175,25 @@ function createCard(newCard) {
     },
 
     () => {
-      console.log("API for like event fired");
+      if (card.isLiked()) {
+        api
+          .disLikeCard("/cards/", newCard._id)
+          .then((response) => card.setIsLiked(response.isLiked))
 
-      api.likeCard("/cards/", newCard._id).catch((err) => console.error(err));
-    },
-    () => {
-      console.log("API for dislike event fired");
-      api
-        .disLikeCard("/cards/", newCard._id)
-        .catch((err) => console.error(err));
+          .catch((err) => console.error(err));
+      } else {
+        api
+          .likeCard("/cards/", newCard._id)
+          .then((response) => card.setIsLiked(response.isLiked))
+
+          .catch((err) => console.error(err));
+      }
+      //   console.log("API for like event fired");
+
+      //   api.likeCard("/cards/", newCard._id).catch((err) => console.error(err));
+      // },
+      // () => {
+      //   console.log("API for dislike event fired");
     }
 
     //api.likeCard("/cards/", "65306057369eff001aa738d9");
