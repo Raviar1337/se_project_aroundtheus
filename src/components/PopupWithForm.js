@@ -7,10 +7,11 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
-  // updating() {
-  //   const saveButton = this._popupElement.querySelector(".modal__save-button");
-  //   saveButton.textcontent = "UPDATING";
-  // }
+  setSaveButtonText(input) {
+    const saveButton = this._popupElement.querySelector(".modal__save-button");
+    saveButton.textContent = input;
+    return saveButton.textContent;
+  }
 
   open() {
     super.open();

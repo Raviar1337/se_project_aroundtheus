@@ -103,12 +103,15 @@ const profileEditModalPopup = new PopupWithForm(
   (data) => {
     //currentUserInfo.setUserInfo(data.title, data.description);
     //profileEditModalPopup.close();
-    profileEditModalPopup.updating();
+    //profileEditModalPopup.updating();
+    profileEditModalPopup.setSaveButtonText("Updating");
+
     api
       .editCurrentUser("/users/me", data)
       .then(profileEditModalPopup.close())
       .then(currentUserInfo.setUserInfo(data.title, data.description))
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(profileEditModalPopup.setSaveButtonText("Save"));
   }
 );
 
@@ -117,6 +120,7 @@ const profileAvatarEditModalPopup = new PopupWithForm(
   (data) => {
     // profileAvatarEditModalPopup.close();
     // profileAvatarEditModalPopup.updating();
+    profileEditModalPopup.setSaveButtonText("Updating");
     api
       .editUserAvatar("/users/me/avatar", data)
       .then((res) => {
@@ -124,7 +128,8 @@ const profileAvatarEditModalPopup = new PopupWithForm(
         currentUserInfo.setUserAvatar(res);
       })
       .then(profileAvatarEditModalPopup.close())
-      .catch((err) => console.error(err));
+      .catch((err) => console.error(err))
+      .finally(profileEditModalPopup.setSaveButtonText("Save"));
   }
 );
 
@@ -140,6 +145,8 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
     link: data.url,
   };
 
+  addCardModalPopup.setSaveButtonText("Updating");
+
   api
     .postCard("/cards", newCard)
     .then((res) => {
@@ -148,7 +155,8 @@ const addCardModalPopup = new PopupWithForm(".modal_card-add", (data) => {
       cardsListSection.addItem(cardElement);
     })
     .then(addCardModalPopup.close())
-    .catch((err) => console.error(err));
+    .catch((err) => console.error(err))
+    .finally(addCardModalPopup.setSaveButtonText("Save"));
 });
 
 function createCard(newCard) {
