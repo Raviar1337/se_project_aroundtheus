@@ -1,15 +1,17 @@
 export default class UserInfo {
-  constructor({ name, job }) {
+  constructor({ name, job, avatar }) {
     this._name = name;
     this._job = job;
+    this._avatar = avatar;
   }
 
   getUserInfo() {
     const profileData = {
       profileName: this._name.textContent,
       profileJob: this._job.textContent,
+      profileAvatar: this._avatar.src,
     };
-    console.log(profileData);
+
     return profileData;
   }
 
@@ -17,7 +19,10 @@ export default class UserInfo {
     //used during form submit action
     this._name.textContent = nameInput;
     this._job.textContent = descriptionInput;
-    console.log("set user info method is firing");
+  }
+
+  setUserAvatar(avatarInput) {
+    this._avatar.src = avatarInput.avatar;
   }
 }
 

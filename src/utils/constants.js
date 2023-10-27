@@ -8,6 +8,15 @@ export const modalBackgrounds = Array.from(document.querySelectorAll(".modal"));
 
 /* ----------------- DOM DECLARATIONS For profile edit modal ---------------- */
 
+export const profileAvatar = document.querySelector(".profile__picture");
+
+export const profileAvatarOverlay = document.querySelector(
+  ".profile__picture-overlay"
+);
+
+export const profileAvatarEditMOdal =
+  document.querySelector(".modal_avatar-edit");
+
 export const profileEditModal = document.querySelector(".modal_profile-edit");
 
 export const profileModalCloseButton = profileEditModal.querySelector(
@@ -78,4 +87,10 @@ export const inputCardName = cardAddModal.querySelector(
 
 export const inputImageLink = cardAddModal.querySelector(
   ".modal__input_type_description"
+);
+
+/* ------------------ DOM Declarations for confirmation box ----------------- */
+
+export const modalConfirmDeleteCard = document.querySelector(
+  ".modal_confirm-delete-card"
 );

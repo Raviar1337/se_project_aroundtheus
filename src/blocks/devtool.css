@@ -1,12 +1,9 @@
 .devtool {
-  display: flex;
-  padding: 0;
-  max-width: 75vw;
-  max-height: 75vh;
+  visibility: visible;
+  background-color: black;
+  opacity: 1;
 }
 
 .devtool2 {
-  padding: 0;
-  max-width: 75vw;
-  max-height: 75vh;
+  background-color: brown;
 }

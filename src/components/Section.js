@@ -4,15 +4,20 @@ export default class Section {
     this._renderer = renderer;
     this._container = container;
   }
-  renderItems() {
-    this._items.forEach((data) => {
+  //lets cause some problems to undo remove first items and add "this._" to second items
+  renderItems(items) {
+    console.log("render items fired");
+    items.forEach((data) => {
       this._renderer(data);
     });
   }
 
   addItem(listElement) {
-    console.log("add item fired");
     this._container.prepend(listElement);
+  }
+
+  appendItem(listElement) {
+    this._container.append(listElement);
   }
 }
 

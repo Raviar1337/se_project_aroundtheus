@@ -36,11 +36,13 @@
   border-style: none;
   background-color: transparent;
   cursor: pointer;
-}
-
-.card__button-image {
+  background: url(../images/Cardlikebutton.svg);
   width: 21px;
   height: 18px;
+}
+
+.card__like-button-active {
+  background: url(../images/LikeButtonActive.svg);
 }
 
 .card__like-button:hover {

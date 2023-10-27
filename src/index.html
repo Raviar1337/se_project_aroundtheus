@@ -18,13 +18,15 @@
         </header>
         <main class="main">
           <section class="profile">
+            <div class="profile__picture-overlay"></div>
             <img
               class="profile__picture"
               src="<%=require('./images/jacques-cousteau.png')%>"
               alt="profile"
             />
+
             <div class="profile__header">
-              <h1 class="profile__title">Jacques Cousteau</h1>
+              <h1 class="profile__title"></h1>
               <button type="button" class="edit-button">
                 <img
                   src="<%=require('./images/edit-pencile.svg')%>"
@@ -32,7 +34,7 @@
                   class="edit-button__image"
                 />
               </button>
-              <p class="profile__description">Explorer</p>
+              <p class="profile__description"></p>
             </div>
 
             <button type="button" class="add-button">
@@ -92,6 +94,29 @@
     </div>
     <!-- end of profile edit modal -->
 
+    <!-- --------------------- edit profile avatar start ---------------------- -->
+    <div class="modal modal_avatar-edit" id="modal_avatar-edit">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h2 class="modal__heading">Change profile picture</h2>
+        <form class="modal__form" id="form__avatar-edit" novalidate>
+          <input
+            type="url"
+            id="card-add__input_url"
+            name="url"
+            class="modal__input modal__input_type_description"
+            placeholder="Image link"
+            required
+          />
+          <span id="card-add__input_url-error" class="modal__error"
+            >this is an error message</span
+          >
+          <button type="submit" class="modal__save-button">Save</button>
+        </form>
+      </div>
+    </div>
+    <!-- ----------------------- Edit profile avatar end ----------------------- -->
+
     <!-- Adding Card Modal Start -->
     <div class="modal modal_card-add">
       <div class="modal__container">
@@ -141,6 +166,18 @@
     </div>
     <!-- End of card open modal -->
 
+    <!-- ----------------------- delete card popup start ----------------------- -->
+    <div class="modal modal_confirm-delete-card">
+      <div class="modal__container">
+        <button type="button" class="modal__close-button"></button>
+        <h2 class="modal__heading">Are youe sure?</h2>
+        <form class="modal__form" id="form__confirm-delete-card" novalidate>
+          <button type="submit" class="modal__save-button">Yes</button>
+        </form>
+      </div>
+    </div>
+    <!-- ------------------------ delete card popup end ------------------------ -->
+
     <!-- Templates start here -->
     <template id="cardElementTemplate">
       <li class="card">
@@ -155,11 +192,11 @@
         <div class="card__footer">
           <h2 class="card__title"></h2>
           <button type="button" class="card__like-button" data-liked="false">
-            <img
+            <!-- <img
               src="<%=require('./images/Cardlikebutton.svg')%>"
               alt="like button"
               class="card__button-image"
-            />
+            /> -->
           </button>
         </div>
       </li>

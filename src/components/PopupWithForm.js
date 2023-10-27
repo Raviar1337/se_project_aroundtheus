@@ -7,12 +7,17 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
+  setSaveButtonText(input) {
+    const saveButton = this._popupElement.querySelector(".modal__save-button");
+    saveButton.textContent = input;
+    // return saveButton.textContent;
+  }
+
   open() {
     super.open();
   }
 
   close() {
-    // this._removeEventListeners();
     const formSelector = this._popupElement.querySelector(".modal__form");
 
     formSelector.reset();
@@ -23,8 +28,18 @@ export default class PopupWithForm extends Popup {
     evt.preventDefault();
     this._handleFormSubmit(this._getInputValues());
 
-    this.close();
+    // this.close();
   };
+
+  setInputValues(data) {
+    const formSelector = this._popupElement.querySelector(".modal__form");
+    const formInputFields = Array.from(
+      formSelector.querySelectorAll(".modal__input")
+    );
+    formInputFields[0].value = data.profileName;
+    formInputFields[1].value = data.profileJob;
+    console.log(formInputFields);
+  }
 
   _getInputValues() {
     const formSelector = this._popupElement.querySelector(".modal__form");
@@ -35,7 +50,7 @@ export default class PopupWithForm extends Popup {
     formInputFields.forEach((input) => {
       data[input.name] = input.value;
     });
-    console.log(data);
+
     return data;
   }
 
