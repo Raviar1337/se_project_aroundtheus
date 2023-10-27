@@ -128,7 +128,7 @@ const profileAvatarEditModalPopup = new PopupWithForm(
   (data) => {
     // profileAvatarEditModalPopup.close();
     // profileAvatarEditModalPopup.updating();
-    profileEditModalPopup.setSaveButtonText("Updating");
+    profileAvatarEditModalPopup.setSaveButtonText("Updating");
     api
       .editUserAvatar(data)
       .then((res) => {
@@ -264,6 +264,9 @@ profileAvatarOverlay.addEventListener("click", openProfileAvatarEditModal);
 cardModalAddButton.addEventListener("click", openCardAddModal);
 
 function openEditProfileModal() {
+  const userInputData = currentUserInfo.getUserInfo();
+  console.log(userInputData);
+  profileEditModalPopup.setInputValues(userInputData);
   profileEditModalPopup.open();
   formValidators["#form__edit-profile"].disableSubmitButton();
 

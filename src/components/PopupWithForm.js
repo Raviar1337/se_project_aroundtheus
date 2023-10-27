@@ -31,6 +31,16 @@ export default class PopupWithForm extends Popup {
     // this.close();
   };
 
+  setInputValues(data) {
+    const formSelector = this._popupElement.querySelector(".modal__form");
+    const formInputFields = Array.from(
+      formSelector.querySelectorAll(".modal__input")
+    );
+    formInputFields[0].value = data.profileName;
+    formInputFields[1].value = data.profileJob;
+    console.log(formInputFields);
+  }
+
   _getInputValues() {
     const formSelector = this._popupElement.querySelector(".modal__form");
     const formInputFields = Array.from(
